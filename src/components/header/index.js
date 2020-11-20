@@ -42,6 +42,23 @@ const Header = () => {
 const Nav = styled.div`
   background-color: #fff;
   border-bottom: 1px solid;
+  width: 100%;
+  top: 0;
+  position: fixed;
+  background: white;
+
+  @media (max-width: 1366px) {
+    width: 100%;
+    top: 0;
+    position: fixed;
+    background: white;
+  }
+  @media (max-width: 1024px) {
+    width: 100%;
+    top: 0;
+    position: fixed;
+    background: white;
+  }
   @media (max-width: 768px) {
     border-bottom: none;
   }
@@ -81,19 +98,21 @@ const NavLeft = styled.div`
     width: 100%;
     text-align: center;
     height: 60px;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     border-top: 1px solid black;
     padding-top: 4%;
+    background: white;
   }
   @media (max-width: 375px) {
     width: 100%;
     text-align: center;
     height: 60px;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     border-top: 1px solid black;
     padding-top: 4%;
+    background: white;
   }
 `;
 const MenuLink = styled.a`
@@ -146,11 +165,23 @@ const NavRight = styled.div`
   }
   @media (max-width: 768px) {
     width: 100%;
-    margin: 2%;
+    height: 60px;
+    position: fixed;
+    top: 0;
+    border-bottom: 1px solid black;
+    padding-top: 4%;
+    background: white;
+    margin: 0;
   }
   @media (max-width: 375px) {
     width: 100%;
-    margin: 5%;
+    height: 60px;
+    position: fixed;
+    top: 0;
+    border-bottom: 1px solid black;
+    padding-top: 4%;
+    background: white;
+    margin: 0;
   }
 `;
 const StyledInput = styled.input`

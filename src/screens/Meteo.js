@@ -11,9 +11,7 @@ const Meteo = () => {
   return (
     <div>
       <p>Météo</p>
-      {meteo.map((ville) => (
-        <p>{ville.title}</p>
-      ))}
+      {meteo.name}
     </div>
   );
 };

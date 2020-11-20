@@ -9,20 +9,22 @@ export const displayMeteo = (meteo) => ({
 
 export const getMeteo = () => (dispatch) => {
   navigator.geolocation.getCurrentPosition(function (position) {
-    const lattlong = `${position.coords.latitude},${position.coords.longitude}`;
+    const lat = position.coords.latitude;
+    const lon = position.coords.longitude;
     console.log("Latitude is :", position.coords.latitude);
     console.log("Longitude is :", position.coords.longitude);
-    console.log(lattlong);
     axios({
       method: "GET",
-      url: "https://www.metaweather.com/api/location/search/?query=london",
-      // params: {
-      //   lattlong: lattlong,
-      // },
+      url: "https://api.openweathermap.org/data/2.5/weather",
+      params: {
+        lat: lat,
+        lon: lon,
+        appid: "e23e25a0193db7cb3dd9bb17df22e6e9",
+      },
     })
       .then((res) => {
-        console.log(res);
-        dispatch(displayMeteo(res));
+        console.log(res.data);
+        dispatch(displayMeteo(res.data));
       })
       .catch((err) => err);
   });

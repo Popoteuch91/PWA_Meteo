@@ -28,7 +28,7 @@ const Header = () => {
           </MenuLink>
         </NavLeft>
         <NavRight>
-          <StyledInput as="a" target="_blank" href="#">
+          <StyledInput as="a" href="/home">
             <FontAwesomeIcon icon="map-marker-alt" size="2x" />
           </StyledInput>
           <Input type="text" placeholder="Search" />
@@ -119,14 +119,14 @@ const MenuLink = styled.a`
   float: left;
   padding-left: 5%;
   padding-right: 5%;
-  border-right: 1px solid;
+  border-right: 1px solid black;
   text-decoration: none;
-  color: black;
+  color: #ffcc32;
   @media (max-width: 1366px) {
     float: left;
     padding-left: 4%;
     padding-right: 4%;
-    border-right: 1px solid;
+    border-right: 1px solid black;
   }
   @media (max-width: 768px) {
     float: left;
@@ -140,6 +140,9 @@ const MenuLink = styled.a`
     padding-left: 11%;
     padding-right: 10%;
     border-right: none;
+    &:hover {
+      color: #296fc6;
+    }
   }
 `;
 const StyledComp = styled(Link)`
@@ -147,6 +150,7 @@ const StyledComp = styled(Link)`
   font-size: 2rem;
   font-weight: 600;
   text-align: center;
+  color: #296fc6;
 
   @media (max-width: 1366px) {
     font-size: 1.5rem;
@@ -185,7 +189,7 @@ const NavRight = styled.div`
   }
 `;
 const StyledInput = styled.input`
-  color: black;
+  color: red;
 `;
 const Input = styled.input`
   width: 80%;
@@ -229,7 +233,7 @@ const Input = styled.input`
     }
   }
   @media (max-width: 375px) {
-    width: 70%;
+    width: 65%;
     font-size: 1.5rem;
     &:active,
     &:focus {

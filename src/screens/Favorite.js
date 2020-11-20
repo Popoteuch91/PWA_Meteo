@@ -107,21 +107,18 @@ const Favorite = () => {
 };
 const StyledDiv = styled.div`
   margin-top: 5%;
-  margin-bottom: 5%;
   padding: 0.5%;
   padding-left: 1%;
   padding-right: 1%;
   @media (max-width: 1366px) {
     margin-top: 5%;
-    margin-bottom: 5%;
     padding: 2%;
     padding-left: 2%;
     padding-right: 2%;
   }
   @media (max-width: 1024px) {
-    margin-top: 5%;
-    margin-bottom: 5%;
-    padding: 3%;
+    margin-top: 7%;
+    padding: 1%;
     padding-left: 2%;
     padding-right: 2%;
   }

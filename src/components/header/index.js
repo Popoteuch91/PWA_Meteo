@@ -1,6 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useSelector, useDispatch } from "react-redux";
+import { setSearch } from "../../actions/ville";
+import { getCurrentLocation } from "../../actions/meteo";
 
 const Link = ({ className, text, ...props }) => (
   <a {...props} className={className}>
@@ -8,6 +11,8 @@ const Link = ({ className, text, ...props }) => (
   </a>
 );
 const Header = () => {
+  const dispatch = useDispatch();
+  const search = useSelector((state) => state.ville.search);
   return (
     <Nav>
       <NavHeader>
@@ -28,11 +33,24 @@ const Header = () => {
           </MenuLink>
         </NavLeft>
         <NavRight>
-          <StyledInput as="a" href="/home">
-            <FontAwesomeIcon icon="map-marker-alt" size="2x" />
-          </StyledInput>
-          <Input type="text" placeholder="Search" />
-          <FontAwesomeIcon icon="search" size="2x" />
+          <FontAwesomeIcon
+            onClick={() => {
+              dispatch(getCurrentLocation());
+            }}
+            icon="map-marker-alt"
+            size="2x"
+          />
+          <Input
+            type="text"
+            placeholder="Search"
+            value={search}
+            onChange={(event) => {
+              dispatch(setSearch(event.target.value));
+            }}
+          />
+          <MenuLink href="/search">
+            <FontAwesomeIcon icon="search" size="2x" />
+          </MenuLink>
         </NavRight>
       </NavHeader>
     </Nav>

@@ -3,6 +3,7 @@ import { Route, Redirect, Switch } from "react-router-dom";
 import Meteo from "../screens/Meteo";
 import Home from "../screens/Home";
 import Favorite from "../screens/Favorite";
+import Search from "../screens/Search";
 
 const Routes = () => {
   return (
@@ -11,6 +12,7 @@ const Routes = () => {
       <Route path={"/home"} component={Home}></Route>
       <Route path={"/meteo"} component={Meteo}></Route>
       <Route path={"/favorite"} component={Favorite}></Route>
+      <Route path={"/search"} component={Search}></Route>
       <Redirect to={"/"}></Redirect>
     </Switch>
   );

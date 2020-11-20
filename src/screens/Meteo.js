@@ -6,9 +6,10 @@ import styled from "styled-components";
 const Meteo = () => {
   const dispatch = useDispatch();
   const meteo = useSelector((state) => state.meteo.meteo);
+  const coordonnees = useSelector((state) => state.meteo.coordonnees);
   useEffect(() => {
-    dispatch(getMeteo());
-  }, []);
+    dispatch(getMeteo(coordonnees));
+  }, [dispatch, coordonnees]);
   return (
     <div>
       <StyledDiv>

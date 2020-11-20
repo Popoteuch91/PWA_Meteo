@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const Home = () => {
-  const counter = useSelector((state) => state.counter.counterValue);
   console.log("test");
 
   useEffect(() => {
@@ -15,7 +14,6 @@ const Home = () => {
   return (
     <div>
       Home
-      <p>{counter}</p>
       <Link to={"/meteo"}>Météo</Link>
     </div>
   );

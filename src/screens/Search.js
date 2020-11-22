@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { displayCoordonnees } from "../actions/meteo";
 import axios_ville from "../axios/ville";
 import axios_meteo from "../axios/meteo";
+import { pushFavorites } from "../actions/ville";
 
 const Search = (props) => {
   const [villes, setVilles] = useState([]);
@@ -48,7 +49,10 @@ const Search = (props) => {
             }}
           >
             {meteoVille.properties.label} a pour température{" "}
-            {meteoVille.meteo.main.temp}
+            {meteoVille.meteo.main.temp}{" "}
+            <span onClick={() => dispatch(pushFavorites(meteoVille))}>
+              [PUSH FAVORITES]
+            </span>
           </p>
         );
       })}

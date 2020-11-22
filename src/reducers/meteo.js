@@ -1,12 +1,7 @@
-import {
-  DISPLAY_METEO,
-  DISPLAY_METEOS,
-  DISPLAY_COORDONNEES,
-} from "../actions/meteo";
+import { DISPLAY_METEO, DISPLAY_COORDONNEES } from "../actions/meteo";
 
 const initialState = {
   meteo: [],
-  meteos: [],
   coordonnees: {
     lon: 3.042048,
     lat: 36.752887,
@@ -19,11 +14,6 @@ const export_meteo = (state = initialState, action) => {
       return {
         ...state,
         meteo: action.payload,
-      };
-    case DISPLAY_METEOS:
-      return {
-        ...state,
-        meteos: action.payload,
       };
     case DISPLAY_COORDONNEES:
       return {

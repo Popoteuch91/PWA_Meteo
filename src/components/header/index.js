@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelector, useDispatch } from "react-redux";
 import { setSearch } from "../../actions/ville";
@@ -11,6 +12,7 @@ const Link = ({ className, text, ...props }) => (
   </a>
 );
 const Header = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const search = useSelector((state) => state.ville.search);
   return (
@@ -21,12 +23,10 @@ const Header = () => {
             <FontAwesomeIcon icon="home" size="2x" />
             <StyledComp text="Accueil" />
           </MenuLink>
-
           <MenuLink href="/meteo">
             <FontAwesomeIcon icon="cloud-moon" size="2x" />
             <StyledComp text="Météo" />
           </MenuLink>
-
           <MenuLink href="/favorite">
             <FontAwesomeIcon icon="star" size="2x" />
             <StyledComp text="Favoris" />
@@ -46,11 +46,9 @@ const Header = () => {
             value={search}
             onChange={(event) => {
               dispatch(setSearch(event.target.value));
+              history.push("/search");
             }}
           />
-          <MenuLink href="/search">
-            <FontAwesomeIcon icon="search" size="2x" />
-          </MenuLink>
         </NavRight>
       </NavHeader>
     </Nav>
@@ -205,9 +203,6 @@ const NavRight = styled.div`
     background: white;
     margin: 0;
   }
-`;
-const StyledInput = styled.input`
-  color: red;
 `;
 const Input = styled.input`
   width: 80%;

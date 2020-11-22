@@ -1,15 +1,20 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { getMeteo } from "../actions/meteo";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
+import axios_meteo from "../axios/meteo";
 
 const Meteo = () => {
-  const dispatch = useDispatch();
-  const meteo = useSelector((state) => state.meteo.meteo);
+  const [meteo, setMeteo] = useState({});
   const coordonnees = useSelector((state) => state.meteo.coordonnees);
+  const appid = useSelector((state) => state.ville.appid);
+
   useEffect(() => {
-    dispatch(getMeteo(coordonnees));
-  }, [dispatch, coordonnees]);
+    axios_meteo
+      .get(`?lon=${coordonnees.lon}&lat=${coordonnees.lat}&appid=${appid}`)
+      .then((res) => {
+        setMeteo(res.data);
+      });
+  }, [coordonnees, appid]);
   return (
     <div>
       <StyledDiv>

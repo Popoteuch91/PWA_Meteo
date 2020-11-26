@@ -1,45 +1,62 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import axios_meteo from "../axios/meteo";
+import Loader from "react-loader-spinner";
+import { Weather, Forecast } from "../axios/meteo";
 
 const Meteo = () => {
   const [meteo, setMeteo] = useState({});
+  const [forecast, setForecast] = useState({});
   const coordonnees = useSelector((state) => state.meteo.coordonnees);
   const appid = useSelector((state) => state.ville.appid);
 
   useEffect(() => {
-    axios_meteo
-      .get(`?lon=${coordonnees.lon}&lat=${coordonnees.lat}&appid=${appid}`)
-      .then((res) => {
-        setMeteo(res.data);
-        console.log(res.data);
-      });
+    Weather.get(
+      `?lon=${coordonnees.lon}&lat=${coordonnees.lat}&appid=${appid}`
+    ).then((res) => {
+      setMeteo(res.data);
+    });
+    Forecast.get(
+      `?lon=${coordonnees.lon}&lat=${coordonnees.lat}&appid=${appid}`
+    ).then((res) => {
+      setForecast(res.data);
+    });
   }, [coordonnees, appid]);
   return (
     <div>
-      <StyledDiv>
-        <StyledH1>Météo Page {meteo.name}</StyledH1>
-        <StyledText>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque
-          doloremque, dolores exercitationem explicabo iste nihil numquam odit
-          officia tenetur totam. Animi, eveniet ipsa iure laborum maxime modi
-          quam sit sunt. Lorem ipsum dolor sit amet, consectetur adipisicing
-          elit. Amet architecto cupiditate dolores error et facilis incidunt
-          ipsum libero maxime modi molestiae nobis nulla praesentium quo
-          repellat, sapiente tempore velit voluptas?Lorem ipsum dolor sit amet,
-          consectetur adipisicing elit. Distinctio doloribus esse inventore iste
-          maxime nihil sunt? Accusantium consequuntur, dolor, exercitationem
-          impedit inventore laborum minus modi provident rerum, tempora totam
-          voluptatum! Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-          Ducimus ea eligendi enim est eveniet ex, excepturi facere in ipsa,
-          laudantium nam officiis perferendis quae quidem quisquam repellendus
-          rerum soluta vero? Lorem ipsum dolor sit amet, consectetur adipisicing
-          elit. Accusantium eum fuga id iste laudantium magnam nostrum obcaecati
-          pariatur provident, saepe. Ab, architecto consectetur dicta dolorem
-          laborum provident sit vero vitae.
-        </StyledText>
-      </StyledDiv>
+      {Object.keys(meteo).length === 0 && meteo.constructor === Object ? (
+        <Loader
+          type="TailSpin"
+          color="#00BFFF"
+          height={100}
+          width={100}
+          timeout={30000} // 30 secs
+        />
+      ) : (
+        <StyledDiv>
+          <StyledH1>Météo Page {meteo.name}</StyledH1>
+          <StyledText>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque
+            doloremque, dolores exercitationem explicabo iste nihil numquam odit
+            officia tenetur totam. Animi, eveniet ipsa iure laborum maxime modi
+            quam sit sunt. Lorem ipsum dolor sit amet, consectetur adipisicing
+            elit. Amet architecto cupiditate dolores error et facilis incidunt
+            ipsum libero maxime modi molestiae nobis nulla praesentium quo
+            repellat, sapiente tempore velit voluptas?Lorem ipsum dolor sit
+            amet, consectetur adipisicing elit. Distinctio doloribus esse
+            inventore iste maxime nihil sunt? Accusantium consequuntur, dolor,
+            exercitationem impedit inventore laborum minus modi provident rerum,
+            tempora totam voluptatum! Lorem ipsum dolor sit amet, consectetur
+            adipisicing elit. Ducimus ea eligendi enim est eveniet ex, excepturi
+            facere in ipsa, laudantium nam officiis perferendis quae quidem
+            quisquam repellendus rerum soluta vero? Lorem ipsum dolor sit amet,
+            consectetur adipisicing elit. Accusantium eum fuga id iste
+            laudantium magnam nostrum obcaecati pariatur provident, saepe. Ab,
+            architecto consectetur dicta dolorem laborum provident sit vero
+            vitae.
+          </StyledText>
+        </StyledDiv>
+      )}
     </div>
   );
 };

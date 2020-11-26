@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { displayCoordonnees } from "../actions/meteo";
 import axios_ville from "../axios/ville";
-import axios_meteo from "../axios/meteo";
+import { Weather } from "../axios/meteo";
 import { pushFavorites } from "../actions/ville";
+import { KalvinToCelsius } from "../mixins/functions";
 
 const Search = (props) => {
   const [villes, setVilles] = useState([]);
@@ -16,7 +17,7 @@ const Search = (props) => {
     if (villes.length === 0) return setMeteoVilles([]);
     let majMeteoVilles = villes;
     const requests = villes.map((ville, idVille) =>
-      axios_meteo.get(
+      Weather.get(
         `?lon=${ville.geometry.coordinates[0]}&lat=${ville.geometry.coordinates[1]}&appid=${appid}`
       )
     );
@@ -40,7 +41,7 @@ const Search = (props) => {
         return (
           <p>
             {meteoVille.properties.label} a pour température{" "}
-            {meteoVille.meteo.main.temp}{" "}
+            {KalvinToCelsius(meteoVille.meteo.main.temp)}{" "}
             <span onClick={() => dispatch(pushFavorites(meteoVille))}>
               [PUSH FAVORITES]
             </span>

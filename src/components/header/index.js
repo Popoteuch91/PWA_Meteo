@@ -10,6 +10,7 @@ const Header = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const search = useSelector((state) => state.ville.search);
+
   return (
     <Nav>
       <NavHeader>

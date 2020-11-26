@@ -1,16 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelector, useDispatch } from "react-redux";
 import { setSearch } from "../../actions/ville";
 import { getCurrentLocation } from "../../actions/meteo";
 
-const Link = ({ className, text, ...props }) => (
-  <span {...props} className={className}>
-    {text}
-  </span>
-);
 const Header = () => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -19,17 +14,17 @@ const Header = () => {
     <Nav>
       <NavHeader>
         <NavLeft>
-          <MenuLink href="/home">
+          <MenuLink to="/home">
             <FontAwesomeIcon icon="home" size="2x" />
-            <StyledComp text="Accueil" />
+            <StyledComp>Accueil</StyledComp>
           </MenuLink>
-          <MenuLink href="/meteo">
+          <MenuLink to="/meteo">
             <FontAwesomeIcon icon="cloud-moon" size="2x" />
-            <StyledComp text="Météo" />
+            <StyledComp>Météo</StyledComp>
           </MenuLink>
-          <MenuLink href="/favorite">
+          <MenuLink to="/favorite">
             <FontAwesomeIcon icon="star" size="2x" />
-            <StyledComp text="Favoris" />
+            <StyledComp>Favoris</StyledComp>
           </MenuLink>
         </NavLeft>
         <NavRight>
@@ -131,7 +126,7 @@ const NavLeft = styled.div`
     background: white;
   }
 `;
-const MenuLink = styled.a`
+const MenuLink = styled(Link)`
   float: left;
   padding-left: 5%;
   padding-right: 5%;
@@ -161,7 +156,7 @@ const MenuLink = styled.a`
     }
   }
 `;
-const StyledComp = styled(Link)`
+const StyledComp = styled.span`
   margin: 20px 0px 0px 10px;
   font-size: 2rem;
   font-weight: 600;

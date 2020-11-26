@@ -26,19 +26,17 @@ const Favorite = () => {
     <div>
       <StyledDiv>
         <StyledH1>Favorite Page</StyledH1>
-        <StyledText>
-          {meteoVilles.map((favorite, idFavorite) => {
-            return (
-              <p>
-                {favorite.properties.label} a pour température{" "}
-                {favorite.meteo.main.temp}{" "}
-                <span onClick={() => dispatch(removeFavorite(idFavorite))}>
-                  [REMOVE FAVORITES]
-                </span>
-              </p>
-            );
-          })}
-        </StyledText>
+        {meteoVilles.map((favorite, idFavorite) => {
+          return (
+            <StyledText>
+              {favorite.properties.label} a pour température{" "}
+              {favorite.meteo.main.temp}{" "}
+              <span onClick={() => dispatch(removeFavorite(idFavorite))}>
+                [REMOVE FAVORITES]
+              </span>
+            </StyledText>
+          );
+        })}
       </StyledDiv>
     </div>
   );

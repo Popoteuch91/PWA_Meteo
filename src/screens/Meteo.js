@@ -37,7 +37,9 @@ const Meteo = () => {
           elit. Accusantium eum fuga id iste laudantium magnam nostrum obcaecati
           pariatur provident, saepe. Ab, architecto consectetur dicta dolorem
           laborum provident sit vero vitae.
-          <hr />
+        </StyledText>
+        <hr />
+        <StyledText>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis
           dicta dolorum eum explicabo magni. Ad aliquam amet asperiores ducimus
           harum minima minus mollitia nesciunt, nihil quo reiciendis repudiandae
@@ -53,7 +55,9 @@ const Meteo = () => {
           This book is a treatise on the theory of ethics, very popular during
           the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit
           amet..", comes from a line in section 1.10.32.
-          <hr />
+        </StyledText>
+        <hr />
+        <StyledText>
           "At vero eos et accusamus et iusto odio dignissimos ducimus qui
           blanditiis praesentium voluptatum deleniti atque corrupti quos dolores
           et quas molestias excepturi sint occaecati cupiditate non provident,
@@ -67,7 +71,9 @@ const Meteo = () => {
           Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis
           voluptatibus maiores alias consequatur aut perferendis doloribus
           asperiores repellat."
-          <hr />
+        </StyledText>
+        <hr />
+        <StyledText>
           "On the other hand, we denounce with righteous indignation and dislike
           men who are so beguiled and demoralized by the charms of pleasure of
           the moment, so blinded by desire, that they cannot foresee the pain
@@ -83,7 +89,9 @@ const Meteo = () => {
           always holds in these matters to this principle of selection: he
           rejects pleasures to secure other greater pleasures, or else he
           endures pains to avoid worse pains."
-          <hr />
+        </StyledText>
+        <hr />
+        <StyledText>
           "But I must explain to you how all this mistaken idea of denouncing
           pleasure and praising pain was born and I will give you a complete
           account of the system, and expound the actual teachings of the great
@@ -99,7 +107,9 @@ const Meteo = () => {
           right to find fault with a man who chooses to enjoy a pleasure that
           has no annoying consequences, or one who avoids a pain that produces
           no resultant pleasure?"
-          <hr />
+        </StyledText>
+        <hr />
+        <StyledText>
           "Sed ut perspiciatis unde omnis iste natus error sit voluptatem
           accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae
           ab illo inventore veritatis et quasi architecto beatae vitae dicta

@@ -4,6 +4,7 @@ import { displayCoordonnees } from "../actions/meteo";
 import axios_ville from "../axios/ville";
 import { Weather } from "../axios/meteo";
 import { pushFavorites } from "../actions/ville";
+import { KalvinToCelsius } from "../mixins/functions";
 
 const Search = (props) => {
   const [villes, setVilles] = useState([]);
@@ -40,7 +41,7 @@ const Search = (props) => {
         return (
           <p>
             {meteoVille.properties.label} a pour température{" "}
-            {meteoVille.meteo.main.temp}{" "}
+            {KalvinToCelsius(meteoVille.meteo.main.temp)}{" "}
             <span onClick={() => dispatch(pushFavorites(meteoVille))}>
               [PUSH FAVORITES]
             </span>

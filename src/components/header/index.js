@@ -7,9 +7,9 @@ import { setSearch } from "../../actions/ville";
 import { getCurrentLocation } from "../../actions/meteo";
 
 const Link = ({ className, text, ...props }) => (
-  <text {...props} className={className}>
+  <span {...props} className={className}>
     {text}
-  </text>
+  </span>
 );
 const Header = () => {
   const history = useHistory();

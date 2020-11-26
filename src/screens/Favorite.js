@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { removeFavorite } from "../actions/ville";
-import axios_meteo from "../axios/meteo";
+import { Weather } from "../axios/meteo";
 
 const Favorite = () => {
   const [meteoVilles, setMeteoVilles] = useState([]);
@@ -13,7 +13,7 @@ const Favorite = () => {
     if (favorites.length === 0) return setMeteoVilles([]);
     let majMeteoVilles = favorites;
     const requests = favorites.map((ville, idVille) =>
-      axios_meteo.get(
+      Weather.get(
         `?lon=${ville.geometry.coordinates[0]}&lat=${ville.geometry.coordinates[1]}&appid=${appid}`
       )
     );

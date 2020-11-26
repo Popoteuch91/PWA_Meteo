@@ -1,19 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import axios_meteo from "../axios/meteo";
+import { Weather, Forecast } from "../axios/meteo";
 
 const Meteo = () => {
   const [meteo, setMeteo] = useState({});
+  const [forecast, setForecast] = useState({});
   const coordonnees = useSelector((state) => state.meteo.coordonnees);
   const appid = useSelector((state) => state.ville.appid);
 
   useEffect(() => {
-    axios_meteo
-      .get(`?lon=${coordonnees.lon}&lat=${coordonnees.lat}&appid=${appid}`)
-      .then((res) => {
-        setMeteo(res.data);
-      });
+    Weather.get(
+      `?lon=${coordonnees.lon}&lat=${coordonnees.lat}&appid=${appid}`
+    ).then((res) => {
+      setMeteo(res.data);
+    });
+    Forecast.get(
+      `?lon=${coordonnees.lon}&lat=${coordonnees.lat}&appid=${appid}`
+    ).then((res) => {
+      console.log(res.data);
+      setForecast(res.data);
+    });
   }, [coordonnees, appid]);
   return (
     <div>

@@ -38,20 +38,23 @@ const Search = (props) => {
     <div>
       {meteoVilles.map((meteoVille) => {
         return (
-          <p
-            onClick={() => {
-              dispatch(
-                displayCoordonnees({
-                  lon: meteoVille.geometry.coordinates[0],
-                  lat: meteoVille.geometry.coordinates[1],
-                })
-              );
-            }}
-          >
+          <p>
             {meteoVille.properties.label} a pour température{" "}
             {meteoVille.meteo.main.temp}{" "}
             <span onClick={() => dispatch(pushFavorites(meteoVille))}>
               [PUSH FAVORITES]
+            </span>
+            <span
+              onClick={() =>
+                dispatch(
+                  displayCoordonnees({
+                    lon: meteoVille.geometry.coordinates[0],
+                    lat: meteoVille.geometry.coordinates[1],
+                  })
+                )
+              }
+            >
+              [SELECT LOCATION]
             </span>
           </p>
         );

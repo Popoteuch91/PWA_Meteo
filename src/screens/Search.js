@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { displayCoordonnees } from "../actions/meteo";
 import axios_ville from "../axios/ville";
-import axios_meteo from "../axios/meteo";
+import { Weather } from "../axios/meteo";
 import { pushFavorites } from "../actions/ville";
 
 const Search = (props) => {
@@ -16,7 +16,7 @@ const Search = (props) => {
     if (villes.length === 0) return setMeteoVilles([]);
     let majMeteoVilles = villes;
     const requests = villes.map((ville, idVille) =>
-      axios_meteo.get(
+      Weather.get(
         `?lon=${ville.geometry.coordinates[0]}&lat=${ville.geometry.coordinates[1]}&appid=${appid}`
       )
     );

@@ -6,11 +6,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { setSearch } from "../../actions/ville";
 import { getCurrentLocation } from "../../actions/meteo";
 
-// const Link = ({ className, text, ...props }) => (
-//   <span {...props} className={className}>
-//     {text}
-//   </span>
-// );
 const Header = () => {
   const history = useHistory();
   const dispatch = useDispatch();

@@ -78,7 +78,6 @@ const Nav = styled.div`
     border-bottom: none;
   }
 `;
-
 const NavHeader = styled.div`
   /*max-width: 90%;*/
   padding: 20px 20px;
@@ -98,7 +97,6 @@ const NavHeader = styled.div`
     padding: 0;
   }
 `;
-
 const NavLeft = styled.div`
   width: 40%;
   text-align: center;

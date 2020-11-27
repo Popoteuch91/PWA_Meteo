@@ -289,13 +289,13 @@ const StyledMain = styled.div`
     box-sizing: border-box;
   }
   font-size: 100%;
-  color: white;
+  /*color: white;*/
   height: 100%;
-  background: linear-gradient(
+  /*background: linear-gradient(
     to bottom,
     rgb(43, 50, 178) 0%,
     rgb(20, 136, 204) 100%
-  );
+  );*/
   /*background: linear-gradient(to bottom, rgb(0 0 0) 0%, rgb(7 113 177) 100%);
   background: linear-gradient(180deg, #7595c4, #edc6bf);*/
   background-repeat: no-repeat;
@@ -410,7 +410,7 @@ const StyledDiv3_ = styled.div`
   font-size: 1.44em;
 `;
 const StyledDiv3_1 = styled.div`
-  color: rgba(255, 255, 255, 0.8);
+  /* color: rgba(255, 255, 255, 0.8);*/
   @media screen and (min-width: 700px) {
     display: block;
   }
@@ -422,7 +422,7 @@ const StyledDiv4 = styled.div`
   }
 `;
 const StyledH2 = styled.h2`
-  color: rgba(255, 255, 255, 0.8);
+  /*color: rgba(255, 255, 255, 0.8);*/
   font-size: 1em;
   font-weight: normal;
   @media screen and (min-width: 768px) {
@@ -437,7 +437,7 @@ const StyledDiv4_1 = styled.div`
   padding: 0.8em 0;
   width: 13%;
   border-radius: 5px;
-  background-color: rgba(0, 0, 0, 0.15);
+  /*background-color: rgba(0, 0, 0, 0.15);/*
   font-size: 1.125em;
   text-align: center;
   @media screen and (min-width: 880px) {
@@ -452,7 +452,7 @@ const StyledDiv5 = styled.div`
   margin-top: 1em;
 `;
 const StyledH2_ = styled.div`
-  color: rgba(255, 255, 255, 0.8);
+  /*color: rgba(255, 255, 255, 0.8);*/
   font-size: 1em;
   font-weight: normal;
   margin-top: 0.83em;
@@ -474,7 +474,7 @@ const StyledDiv5_1 = styled.div`
   padding: 0.8em 0;
   width: 100%;
   border-radius: 5px;
-  background-color: rgba(0, 0, 0, 0.2);
+  /*background-color: rgba(0, 0, 0, 0.2);*/
   font-size: 1.19em;
   text-align: center;
 `;
@@ -489,7 +489,7 @@ const StyledDiv5_2 = styled.div`
   }
 `;
 const StyledDiv5_3 = styled.div`
-  color: rgba(255, 255, 255, 0.6);
+  /*color: rgba(255, 255, 255, 0.6);*/
   font-size: 0.83em;
 `;
 const StyledDiv5_4 = styled.div`

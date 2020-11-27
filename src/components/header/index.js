@@ -10,7 +10,6 @@ const Header = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const search = useSelector((state) => state.ville.search);
-
   return (
     <Nav>
       <NavHeader>
@@ -160,7 +159,7 @@ const StyledComp = styled.span`
   font-size: 2rem;
   font-weight: 600;
   text-align: center;
-  color: #296fc6;
+  color: #296fc6 !important;
 
   @media (max-width: 1366px) {
     font-size: 1.5rem;

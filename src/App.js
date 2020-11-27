@@ -1,7 +1,10 @@
 import React from "react";
 import { Provider } from "react-redux";
 import { store } from "./config/store";
-
+import { createGlobalStyle, ThemeProvider } from "styled-components";
+import { useDarkMode } from "./actions/useDarkMode";
+import { lightTheme, darkTheme } from "./config/theme";
+import Toggle from "./components/toggle";
 import "./App.css";
 import Header from "./components/header";
 import Footer from "./components/footer";
@@ -17,13 +20,47 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(fab, faHome, faCloudMoon, faStar, faMapMarkerAlt, faSearch);
-
+export const GlobalStyles = createGlobalStyle`
+  *,
+  *::after,
+  *::before {
+    box-sizing: border-box;
+  }
+  body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+    background: ${({ theme }) => theme.body};
+    color: ${({ theme }) => theme.text};
+    color: ${({ theme }) => theme.p};
+    padding: 0;
+    margin: 0;
+    transition: all 0.25s linear;
+  } 
+  a {
+    color: ${({ theme }) => theme.text};
+  }
+`;
 function App() {
+  const [theme, toggleTheme, componentMounted] = useDarkMode();
+  const themeMode = theme === "light" ? lightTheme : darkTheme;
+
+  if (!componentMounted) {
+    return <div />;
+  }
+
   return (
     <Provider store={store}>
-      <Header />
-      <Routes />
-      <Footer />
+      <ThemeProvider theme={themeMode}>
+        <>
+          <GlobalStyles />
+          <Toggle theme={theme} toggleTheme={toggleTheme} />
+          <Header />
+          <Routes />
+          <Footer />
+        </>
+      </ThemeProvider>
     </Provider>
   );
 }

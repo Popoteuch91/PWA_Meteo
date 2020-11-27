@@ -111,14 +111,15 @@ const StyledMain = styled.div`
     box-sizing: border-box;
   }
   font-size: 100%;
-  color: white;
   height: 100%;
+  /*color: white;
+  
   background: linear-gradient(
     to bottom,
     rgb(43, 50, 178) 0%,
     rgb(20, 136, 204) 100%
   );
-  /*background: linear-gradient(to bottom, rgb(0 0 0) 0%, rgb(7 113 177) 100%);
+  background: linear-gradient(to bottom, rgb(0 0 0) 0%, rgb(7 113 177) 100%);
   background: linear-gradient(180deg, #7595c4, #edc6bf);*/
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -263,7 +264,7 @@ const StyledDiv3_ = styled.div`
   font-size: 1.44em;
 `;
 const StyledDiv3_1 = styled.div`
-  color: rgba(255, 255, 255, 0.8);
+  /*color: rgba(255, 255, 255, 0.8);*/
   @media screen and (min-width: 700px) {
     display: block;
   }

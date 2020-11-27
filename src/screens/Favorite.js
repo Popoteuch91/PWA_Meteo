@@ -84,14 +84,15 @@ const StyledMain = styled.div`
     box-sizing: border-box;
   }
   font-size: 100%;
-  color: white;
   height: 100%;
-  background: linear-gradient(
+  /* color: white;*/
+
+  /*background: linear-gradient(
     to bottom,
     rgb(43, 50, 178) 0%,
     rgb(20, 136, 204) 100%
   );
-  /*background: linear-gradient(to bottom, rgb(0 0 0) 0%, rgb(7 113 177) 100%);
+  background: linear-gradient(to bottom, rgb(0 0 0) 0%, rgb(7 113 177) 100%);
   background: linear-gradient(180deg, #7595c4, #edc6bf);*/
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -142,35 +143,55 @@ const StyledDiv = styled.div`
     margin-bottom: 0.3em;
     padding: 0.8em 0.8em;
     border-radius: 5px;
-    background: linear-gradient(to bottom, rgb(0 0 0) 0%, rgb(7 113 177) 100%);
+    background: linear-gradient(
+      to bottom,
+      rgb(255 136 136) 0%,
+      rgb(255 0 0) 100%
+    );
   }
   @media (max-width: 1366px) {
     margin-top: 0.5em;
     margin-bottom: 0.3em;
     padding: 0.8em 0.8em;
     border-radius: 5px;
-    background: linear-gradient(to bottom, rgb(0 0 0) 0%, rgb(7 113 177) 100%);
+    background: linear-gradient(
+      to bottom,
+      rgb(255 136 136) 0%,
+      rgb(255 0 0) 100%
+    );
   }
   @media (max-width: 1024px) {
     margin-top: 0.5em;
     margin-bottom: 0.3em;
     padding: 0.8em 0.8em;
     border-radius: 5px;
-    background: linear-gradient(to bottom, rgb(0 0 0) 0%, rgb(7 113 177) 100%);
+    background: linear-gradient(
+      to bottom,
+      rgb(255 136 136) 0%,
+      rgb(255 0 0) 100%
+    );
   }
   @media (max-width: 768px) {
     margin-top: 0.5em;
     margin-bottom: 0.3em;
     padding: 0.8em 0.8em;
     border-radius: 5px;
-    background: linear-gradient(to bottom, rgb(0 0 0) 0%, rgb(7 113 177) 100%);
+    background: linear-gradient(
+      to bottom,
+      rgb(255 136 136) 0%,
+      rgb(255 0 0) 100%
+    );
   }
   @media (max-width: 375px) {
     margin-top: 1em;
     margin-bottom: 0.3em;
     padding: 0.8em 0.8em;
     border-radius: 5px;
-    background: linear-gradient(to bottom, rgb(0 0 0) 0%, rgb(7 113 177) 100%);
+    background: linear-gradient(
+      to bottom,
+      rgb(255 136 136) 0%,
+      rgb(255 0 0) 100%
+    );
   }
 `;
 const StyledDiv1 = styled.div`
@@ -236,13 +257,13 @@ const StyledDiv3_ = styled.div`
   font-size: 1.44em;
 `;
 const StyledDiv3_1 = styled.div`
-  color: rgba(255, 255, 255, 0.8);
+  /*color: rgba(255, 255, 255, 0.8);*/
   @media screen and (min-width: 700px) {
     display: block;
   }
 `;
 const StyledButton = styled.button`
-  background: #fd2d33;
+  background: #444;
   color: white;
   font-size: 15px;
   padding: 10px 30px;

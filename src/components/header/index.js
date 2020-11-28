@@ -31,6 +31,7 @@ const Header = () => {
           <FontAwesomeIcon
             onClick={() => {
               dispatch(getCurrentLocation());
+              history.push("/meteo");
             }}
             icon="map-marker-alt"
             size="2x"

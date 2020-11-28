@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import { pushFavorites, removeFavorite } from "../actions/ville";
+import { removeFavorite } from "../actions/ville";
 import { Weather } from "../axios/meteo";
 import { KalvinToCelsius, UnixTimeToHour } from "../mixins/functions";
 
@@ -22,7 +22,7 @@ const Favorite = () => {
       res.map((meteo, idVille) => (majMeteoVilles[idVille].meteo = meteo.data));
       setMeteoVilles(majMeteoVilles);
     });
-  }, [favorites, appid]);
+  }, [favorites.length, appid]);
   return (
     <StyledMain>
       {meteoVilles.map((favorite, idFavorite) => {
@@ -72,7 +72,11 @@ const Favorite = () => {
                 <StyledDiv3_1>Sunset</StyledDiv3_1>
               </div>
             </StyledDiv3>
-            <StyledButton onClick={() => dispatch(removeFavorite(idFavorite))}>
+            <StyledButton
+              onClick={() => {
+                dispatch(removeFavorite(idFavorite));
+              }}
+            >
               Retirer à la liste des favoris
             </StyledButton>
           </StyledDiv>

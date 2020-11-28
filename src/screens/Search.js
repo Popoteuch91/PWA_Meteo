@@ -33,7 +33,6 @@ const Search = (props) => {
   useEffect(() => {
     if (search.length >= 1) {
       axios_ville.get(`?limit=5&type=municipality&q=${search}`).then((res) => {
-        console.log(res);
         setVilles(res.data.features);
       });
     }
@@ -104,7 +103,7 @@ const Search = (props) => {
                       lat: meteoVille.geometry.coordinates[1],
                     })
                   );
-                  history.push("/");
+                  history.push("/meteo");
                 }}
               >
                 Afficher cette localisation

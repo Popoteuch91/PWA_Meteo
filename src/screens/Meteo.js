@@ -3,11 +3,27 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Loader from "react-loader-spinner";
 import { Weather, Forecast } from "../axios/meteo";
-import { KalvinToCelsius } from "../mixins/functions";
+import {
+  KalvinToCelsius,
+  UnixTimeToHour,
+  UnixTimeToDate,
+  UnixTimeToDay,
+} from "../mixins/functions";
 
+const LoaderBase = () => (
+  <Loader
+    type="TailSpin"
+    color="#00BFFF"
+    height={100}
+    width={100}
+    timeout={30000} // 30 secs
+  />
+);
 const Meteo = () => {
   const [meteo, setMeteo] = useState({});
   const [forecast, setForecast] = useState({});
+  const [dailyMeteo, setDailyMeteo] = useState([]);
+  const [previsionsMeteo, setPrevisionsMeteo] = useState([]);
   const coordonnees = useSelector((state) => state.meteo.coordonnees);
   const appid = useSelector((state) => state.ville.appid);
   useEffect(() => {
@@ -15,271 +31,132 @@ const Meteo = () => {
       `?lon=${coordonnees.lon}&lat=${coordonnees.lat}&appid=${appid}`
     ).then((res) => {
       setMeteo(res.data);
-      console.log(res.data);
     });
     Forecast.get(
       `?lon=${coordonnees.lon}&lat=${coordonnees.lat}&appid=${appid}`
     ).then((res) => {
+      let dMeteo = [];
+      for (let i = 0; i < 8; i++) {
+        dMeteo.push(
+          <StyledDiv4_1>
+            <StyledDiv4_2>{UnixTimeToHour(res.data.list[i].dt)}</StyledDiv4_2>
+            <img
+              src={`http://openweathermap.org/img/wn/${res.data.list[i].weather[0].icon}@2x.png`}
+            />
+            <div>{KalvinToCelsius(res.data.list[i].main.temp)}°</div>
+          </StyledDiv4_1>
+        );
+      }
+      let pMeteo = [];
+      for (let i = 1; i <= 5; i++) {
+        pMeteo.push(
+          <StyledDiv5_1>
+            <StyledDiv5_2>
+              {UnixTimeToDay(res.data.list[8 * i - 1].dt)}
+              <StyledDiv5_3>
+                {UnixTimeToDate(res.data.list[8 * i - 1].dt)}
+              </StyledDiv5_3>
+            </StyledDiv5_2>
+            <StyledDiv5_4>
+              {KalvinToCelsius(res.data.list[8 * i - 1].main.temp_min)}°
+              <StyledDiv5_3>Low</StyledDiv5_3>
+            </StyledDiv5_4>
+            <StyledDiv5_4>
+              {KalvinToCelsius(res.data.list[8 * i - 1].main.temp_max)}°
+              <StyledDiv5_3>High</StyledDiv5_3>
+            </StyledDiv5_4>
+            <StyledDiv5_5>
+              <img
+                src={`http://openweathermap.org/img/wn/${
+                  res.data.list[8 * i - 1].weather[0].icon
+                }@2x.png`}
+              />
+            </StyledDiv5_5>
+            <StyledDiv5_6>
+              {res.data.list[8 * i - 1].main.humidity}%
+              <StyledDiv5_3>Humidity</StyledDiv5_3>
+            </StyledDiv5_6>
+            <StyledDiv5_6>
+              {res.data.list[8 * i - 1].wind.speed}mph
+              <StyledDiv5_3>Wind</StyledDiv5_3>
+            </StyledDiv5_6>
+          </StyledDiv5_1>
+        );
+      }
+      setPrevisionsMeteo(pMeteo);
+      setDailyMeteo(dMeteo);
       setForecast(res.data);
-      console.log(res.data);
-      console.log("toi");
     });
   }, [coordonnees, appid]);
+
   return (
-    <div>
-      {(Object.keys(meteo).length === 0 && meteo.constructor === Object) ||
-      (Object.keys(forecast).length === 0 &&
-        forecast.constructor === Object) ? (
-        <Loader
-          type="TailSpin"
-          color="#00BFFF"
-          height={100}
-          width={100}
-          timeout={30000} // 30 secs
-        />
-      ) : (
-        <StyledMain>
-          <StyledDiv>
-            <StyledDiv1>
-              <StyledH1>
-                {meteo.name}, {meteo.sys.country}
-              </StyledH1>
-              <StyledText>Sunday 4th August</StyledText>
-            </StyledDiv1>
-            <StyledDiv2>
-              <StyledDiv2_>
-                <img
-                  src={`http://openweathermap.org/img/wn/${meteo.weather[0].icon}@2x.png`}
-                />
-              </StyledDiv2_>
-              <StyledDiv2_1>
-                <StyledDiv2_2>{KalvinToCelsius(meteo.main.temp)}°</StyledDiv2_2>
-                <StyledDiv2_3>{meteo.weather[0].main}</StyledDiv2_3>
-              </StyledDiv2_1>
-            </StyledDiv2>
-            <StyledDiv3>
-              <div>
-                <StyledDiv3_>
-                  {KalvinToCelsius(meteo.main.temp_max)}°
-                </StyledDiv3_>
-                <StyledDiv3_1>High</StyledDiv3_1>
-                <StyledDiv3_>
-                  {KalvinToCelsius(meteo.main.temp_min)}°
-                </StyledDiv3_>
-                <StyledDiv3_1>Low</StyledDiv3_1>
-              </div>
-              <div>
-                <StyledDiv3_>{meteo.wind.speed}mph</StyledDiv3_>
-                <StyledDiv3_1>Wind</StyledDiv3_1>
-                <StyledDiv3_>{meteo.main.humidity}%</StyledDiv3_>
-                <StyledDiv3_1>Humidity</StyledDiv3_1>
-              </div>
-              <div>
-                <StyledDiv3_>{meteo.sys.sunrise}</StyledDiv3_>
-                <StyledDiv3_1>Sunrise</StyledDiv3_1>
-                <StyledDiv3_>{meteo.sys.sunset}</StyledDiv3_>
-                <StyledDiv3_1>Sunset</StyledDiv3_1>
-              </div>
-            </StyledDiv3>
-            <StyledDiv4>
-              <StyledH2>La météo du jour</StyledH2>
-              <StyledDiv4_>
-                <StyledDiv4_1>
-                  <StyledDiv4_2>3am</StyledDiv4_2>
-                  <img
-                    src={`http://openweathermap.org/img/wn/${forecast.list[0].weather[0].icon}@2x.png`}
-                  />
-                  <div>{KalvinToCelsius(forecast.list[0].main.temp)}°</div>
-                </StyledDiv4_1>
-                <StyledDiv4_1>
-                  <StyledDiv4_2>6am</StyledDiv4_2>
-                  <img
-                    src={`http://openweathermap.org/img/wn/${forecast.list[1].weather[0].icon}@2x.png`}
-                  />
-                  <div>{KalvinToCelsius(forecast.list[1].main.temp)}°</div>
-                </StyledDiv4_1>
-                <StyledDiv4_1>
-                  <StyledDiv4_2>9am</StyledDiv4_2>
-                  <img
-                    src={`http://openweathermap.org/img/wn/${forecast.list[2].weather[0].icon}@2x.png`}
-                  />
-                  <div>{KalvinToCelsius(forecast.list[2].main.temp)}°</div>
-                </StyledDiv4_1>
-                <StyledDiv4_1>
-                  <StyledDiv4_2>12pm</StyledDiv4_2>
-                  <img
-                    src={`http://openweathermap.org/img/wn/${forecast.list[3].weather[0].icon}@2x.png`}
-                  />
-                  <div>{KalvinToCelsius(forecast.list[3].main.temp)}°</div>
-                </StyledDiv4_1>
-                <StyledDiv4_1>
-                  <StyledDiv4_2>3pm</StyledDiv4_2>
-                  <img
-                    src={`http://openweathermap.org/img/wn/${forecast.list[4].weather[0].icon}@2x.png`}
-                  />
-                  <div>{KalvinToCelsius(forecast.list[4].main.temp)}°</div>
-                </StyledDiv4_1>
-                <StyledDiv4_1>
-                  <StyledDiv4_2>6pm</StyledDiv4_2>
-                  <img
-                    src={`http://openweathermap.org/img/wn/${forecast.list[5].weather[0].icon}@2x.png`}
-                  />
-                  <div>{KalvinToCelsius(forecast.list[5].main.temp)}°</div>
-                </StyledDiv4_1>
-                <StyledDiv4_1>
-                  <StyledDiv4_2>9pm</StyledDiv4_2>
-                  <img
-                    src={`http://openweathermap.org/img/wn/${forecast.list[6].weather[0].icon}@2x.png`}
-                  />
-                  <div>{KalvinToCelsius(forecast.list[6].main.temp)}°</div>
-                </StyledDiv4_1>
-              </StyledDiv4_>
-            </StyledDiv4>
-            <StyledDiv5>
-              <StyledH2_>Les jours à venir</StyledH2_>
-              <StyledDiv5_>
-                <StyledDiv5_1>
-                  <StyledDiv5_2>
-                    Tue
-                    <StyledDiv5_3>30/7</StyledDiv5_3>
-                  </StyledDiv5_2>
-                  <StyledDiv5_4>
-                    {KalvinToCelsius(forecast.list[2].main.temp_min)}°
-                    <StyledDiv5_3>Low</StyledDiv5_3>
-                  </StyledDiv5_4>
-                  <StyledDiv5_4>
-                    {KalvinToCelsius(forecast.list[2].main.temp_max)}°
-                    <StyledDiv5_3>High</StyledDiv5_3>
-                  </StyledDiv5_4>
-                  <StyledDiv5_5>
-                    <img
-                      src={`http://openweathermap.org/img/wn/${forecast.list[2].weather[0].icon}@2x.png`}
-                      alt=""
-                    />
-                  </StyledDiv5_5>
-                  <StyledDiv5_6>
-                    {forecast.list[2].main.humidity}%
-                    <StyledDiv5_3>Humidity</StyledDiv5_3>
-                  </StyledDiv5_6>
-                  <StyledDiv5_6>
-                    {forecast.list[2].wind.speed}mph
-                    <StyledDiv5_3>Wind</StyledDiv5_3>
-                  </StyledDiv5_6>
-                </StyledDiv5_1>
-                <StyledDiv5_1>
-                  <StyledDiv5_2>
-                    Wed
-                    <StyledDiv5_3>31/7</StyledDiv5_3>
-                  </StyledDiv5_2>
-                  <StyledDiv5_4>
-                    {KalvinToCelsius(forecast.list[10].main.temp_min)}°
-                    <StyledDiv5_3>Low</StyledDiv5_3>
-                  </StyledDiv5_4>
-                  <StyledDiv5_4>
-                    {KalvinToCelsius(forecast.list[10].main.temp_max)}°
-                    <StyledDiv5_3>High</StyledDiv5_3>
-                  </StyledDiv5_4>
-                  <StyledDiv5_5>
-                    <img
-                      src={`http://openweathermap.org/img/wn/${forecast.list[10].weather[0].icon}@2x.png`}
-                    />
-                  </StyledDiv5_5>
-                  <StyledDiv5_6>
-                    {forecast.list[10].main.humidity}%
-                    <StyledDiv5_3>Humidity</StyledDiv5_3>
-                  </StyledDiv5_6>
-                  <StyledDiv5_6>
-                    {forecast.list[10].wind.speed}mph
-                    <StyledDiv5_3>Wind</StyledDiv5_3>
-                  </StyledDiv5_6>
-                </StyledDiv5_1>
-                <StyledDiv5_1>
-                  <StyledDiv5_2>
-                    Thur
-                    <StyledDiv5_3>1/8</StyledDiv5_3>
-                  </StyledDiv5_2>
-                  <StyledDiv5_4>
-                    {KalvinToCelsius(forecast.list[18].main.temp_min)}°
-                    <StyledDiv5_3>Low</StyledDiv5_3>
-                  </StyledDiv5_4>
-                  <StyledDiv5_4>
-                    {KalvinToCelsius(forecast.list[18].main.temp_max)}°
-                    <StyledDiv5_3>High</StyledDiv5_3>
-                  </StyledDiv5_4>
-                  <StyledDiv5_5>
-                    <img
-                      src={`http://openweathermap.org/img/wn/${forecast.list[18].weather[0].icon}@2x.png`}
-                    />
-                  </StyledDiv5_5>
-                  <StyledDiv5_6>
-                    {forecast.list[18].main.humidity}%
-                    <StyledDiv5_3>Humidity</StyledDiv5_3>
-                  </StyledDiv5_6>
-                  <StyledDiv5_6>
-                    {forecast.list[18].wind.speed}mph
-                    <StyledDiv5_3>Wind</StyledDiv5_3>
-                  </StyledDiv5_6>
-                </StyledDiv5_1>
-                <StyledDiv5_1>
-                  <StyledDiv5_2>
-                    Tue
-                    <StyledDiv5_3>2/8</StyledDiv5_3>
-                  </StyledDiv5_2>
-                  <StyledDiv5_4>
-                    {KalvinToCelsius(forecast.list[26].main.temp_min)}°
-                    <StyledDiv5_3>Low</StyledDiv5_3>
-                  </StyledDiv5_4>
-                  <StyledDiv5_4>
-                    {KalvinToCelsius(forecast.list[26].main.temp_max)}°
-                    <StyledDiv5_3>High</StyledDiv5_3>
-                  </StyledDiv5_4>
-                  <StyledDiv5_5>
-                    <img
-                      src={`http://openweathermap.org/img/wn/${forecast.list[26].weather[0].icon}@2x.png`}
-                    />
-                  </StyledDiv5_5>
-                  <StyledDiv5_6>
-                    {forecast.list[26].main.humidity}%
-                    <StyledDiv5_3>Humidity</StyledDiv5_3>
-                  </StyledDiv5_6>
-                  <StyledDiv5_6>
-                    {forecast.list[26].wind.speed}mph
-                    <StyledDiv5_3>Wind</StyledDiv5_3>
-                  </StyledDiv5_6>
-                </StyledDiv5_1>
-                <StyledDiv5_1>
-                  <StyledDiv5_2>
-                    Tue
-                    <StyledDiv5_3>30/7</StyledDiv5_3>
-                  </StyledDiv5_2>
-                  <StyledDiv5_4>
-                    {KalvinToCelsius(forecast.list[34].main.temp_min)}°
-                    <StyledDiv5_3>Low</StyledDiv5_3>
-                  </StyledDiv5_4>
-                  <StyledDiv5_4>
-                    {KalvinToCelsius(forecast.list[34].main.temp_max)}°
-                    <StyledDiv5_3>High</StyledDiv5_3>
-                  </StyledDiv5_4>
-                  <StyledDiv5_5>
-                    <img
-                      src={`http://openweathermap.org/img/wn/${forecast.list[34].weather[0].icon}@2x.png`}
-                    />
-                  </StyledDiv5_5>
-                  <StyledDiv5_6>
-                    {forecast.list[34].main.humidity}%
-                    <StyledDiv5_3>Humidity</StyledDiv5_3>
-                  </StyledDiv5_6>
-                  <StyledDiv5_6>
-                    {forecast.list[34].wind.speed}mph
-                    <StyledDiv5_3>Wind</StyledDiv5_3>
-                  </StyledDiv5_6>
-                </StyledDiv5_1>
-              </StyledDiv5_>
-            </StyledDiv5>
-          </StyledDiv>
-        </StyledMain>
-      )}
-    </div>
+    <StyledMain>
+      <StyledDiv>
+        {Object.keys(meteo).length === 0 && meteo.constructor === Object ? (
+          <LoaderBase />
+        ) : (
+          <StyledDiv1>
+            <StyledH1>
+              {meteo.name}, {meteo.sys.country}
+            </StyledH1>
+            <StyledText>Sunday 4th August</StyledText>
+          </StyledDiv1>
+        )}
+        {Object.keys(meteo).length === 0 && meteo.constructor === Object ? (
+          <LoaderBase />
+        ) : (
+          <StyledDiv2>
+            <StyledDiv2_>
+              <img
+                src={`http://openweathermap.org/img/wn/${meteo.weather[0].icon}@2x.png`}
+              />
+            </StyledDiv2_>
+            <StyledDiv2_1>
+              <StyledDiv2_2>{KalvinToCelsius(meteo.main.temp)}°</StyledDiv2_2>
+              <StyledDiv2_3>{meteo.weather[0].main}</StyledDiv2_3>
+            </StyledDiv2_1>
+          </StyledDiv2>
+        )}
+        {Object.keys(meteo).length === 0 && meteo.constructor === Object ? (
+          <LoaderBase />
+        ) : (
+          <StyledDiv3>
+            <div>
+              <StyledDiv3_>{KalvinToCelsius(meteo.main.temp_max)}°</StyledDiv3_>
+              <StyledDiv3_1>High</StyledDiv3_1>
+              <StyledDiv3_>{KalvinToCelsius(meteo.main.temp_min)}°</StyledDiv3_>
+              <StyledDiv3_1>Low</StyledDiv3_1>
+            </div>
+            <div>
+              <StyledDiv3_>{meteo.wind.speed}mph</StyledDiv3_>
+              <StyledDiv3_1>Wind</StyledDiv3_1>
+              <StyledDiv3_>{meteo.main.humidity}%</StyledDiv3_>
+              <StyledDiv3_1>Humidity</StyledDiv3_1>
+            </div>
+            <div>
+              <StyledDiv3_>{UnixTimeToHour(meteo.sys.sunrise)}</StyledDiv3_>
+              <StyledDiv3_1>Sunrise</StyledDiv3_1>
+              <StyledDiv3_>{UnixTimeToHour(meteo.sys.sunset)}</StyledDiv3_>
+              <StyledDiv3_1>Sunset</StyledDiv3_1>
+            </div>
+          </StyledDiv3>
+        )}
+        <StyledDiv4>
+          <StyledH2>La météo du jour</StyledH2>
+          <StyledDiv4_>
+            {dailyMeteo.length === 0 ? <LoaderBase /> : dailyMeteo}
+          </StyledDiv4_>
+        </StyledDiv4>
+        <StyledDiv5>
+          <StyledH2_>Les jours à venir</StyledH2_>
+          {previsionsMeteo.length === 0 ? (
+            <LoaderBase />
+          ) : (
+            <StyledDiv5_>{previsionsMeteo}</StyledDiv5_>
+          )}
+        </StyledDiv5>
+      </StyledDiv>
+    </StyledMain>
   );
 };
 const StyledMain = styled.div`
@@ -440,9 +317,9 @@ const StyledDiv4_1 = styled.div`
   /*background-color: rgba(0, 0, 0, 0.15);/*
   font-size: 1.125em;
   text-align: center;
-  @media screen and (min-width: 880px) {
+  /*@media screen and (min-width: 880px) {
     width: 6.05em;
-  }
+  }*/
 `;
 const StyledDiv4_2 = styled.div`
   margin-bottom: 0.5em;

@@ -75,6 +75,7 @@ const Favorite = () => {
             <StyledButton
               onClick={() => {
                 dispatch(removeFavorite(idFavorite));
+                window.location.reload(); // Temporaire
               }}
             >
               Retirer à la liste des favoris

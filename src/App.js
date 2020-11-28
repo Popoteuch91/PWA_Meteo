@@ -1,6 +1,7 @@
 import React from "react";
 import { Provider } from "react-redux";
-import { store } from "./config/store";
+import Store from "./config/store";
+import { PersistGate } from "redux-persist/integration/react";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { useDarkMode } from "./actions/useDarkMode";
 import { lightTheme, darkTheme } from "./config/theme";
@@ -51,16 +52,18 @@ function App() {
   }
 
   return (
-    <Provider store={store}>
-      <ThemeProvider theme={themeMode}>
-        <>
-          <GlobalStyles />
-          <Toggle theme={theme} toggleTheme={toggleTheme} />
-          <Header />
-          <Routes />
-          <Footer />
-        </>
-      </ThemeProvider>
+    <Provider store={Store().store}>
+      <PersistGate loading={null} persistor={Store().persistor}>
+        <ThemeProvider theme={themeMode}>
+          <>
+            <GlobalStyles />
+            <Toggle theme={theme} toggleTheme={toggleTheme} />
+            <Header />
+            <Routes />
+            <Footer />
+          </>
+        </ThemeProvider>
+      </PersistGate>
     </Provider>
   );
 }

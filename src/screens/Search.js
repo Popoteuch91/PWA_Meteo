@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { displayCoordonnees } from "../actions/meteo";
 import axios_ville from "../axios/ville";
 import { Weather } from "../axios/meteo";
 import { pushFavorites } from "../actions/ville";
-import { KalvinToCelsius } from "../mixins/functions";
+import { KalvinToCelsius, UnixTimeToHour } from "../mixins/functions";
 import styled from "styled-components";
 
 const Search = (props) => {
   const [villes, setVilles] = useState([]);
   const [meteoVilles, setMeteoVilles] = useState([]);
   const dispatch = useDispatch();
+  const history = useHistory();
   const search = useSelector((state) => state.ville.search);
   const appid = useSelector((state) => state.ville.appid);
 
@@ -75,25 +77,35 @@ const Search = (props) => {
                 <StyledDiv3_1>Humidity</StyledDiv3_1>
               </div>
               <div>
-                <StyledDiv3_>{meteoVille.meteo.sys.sunrise}</StyledDiv3_>
+                <StyledDiv3_>
+                  {UnixTimeToHour(meteoVille.meteo.sys.sunrise)}
+                </StyledDiv3_>
                 <StyledDiv3_1>Sunrise</StyledDiv3_1>
-                <StyledDiv3_>{meteoVille.meteo.sys.sunset}</StyledDiv3_>
+                <StyledDiv3_>
+                  {UnixTimeToHour(meteoVille.meteo.sys.sunset)}
+                </StyledDiv3_>
                 <StyledDiv3_1>Sunset</StyledDiv3_1>
               </div>
             </StyledDiv3>
             <div>
-              <StyledButton onClick={() => dispatch(pushFavorites(meteoVille))}>
+              <StyledButton
+                onClick={() => {
+                  dispatch(pushFavorites(meteoVille));
+                  history.push("/favorite");
+                }}
+              >
                 Ajouter à la liste des favoris
               </StyledButton>
               <StyledButton1
-                onClick={() =>
+                onClick={() => {
                   dispatch(
                     displayCoordonnees({
                       lon: meteoVille.geometry.coordinates[0],
                       lat: meteoVille.geometry.coordinates[1],
                     })
-                  )
-                }
+                  );
+                  history.push("/");
+                }}
               >
                 Afficher cette localisation
               </StyledButton1>

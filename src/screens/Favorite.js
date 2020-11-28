@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { pushFavorites, removeFavorite } from "../actions/ville";
 import { Weather } from "../axios/meteo";
-import { KalvinToCelsius } from "../mixins/functions";
+import { KalvinToCelsius, UnixTimeToHour } from "../mixins/functions";
 
 const Favorite = () => {
   const [meteoVilles, setMeteoVilles] = useState([]);
@@ -62,9 +62,13 @@ const Favorite = () => {
                 <StyledDiv3_1>Humidity</StyledDiv3_1>
               </div>
               <div>
-                <StyledDiv3_>{favorite.meteo.sys.sunrise}</StyledDiv3_>
+                <StyledDiv3_>
+                  {UnixTimeToHour(favorite.meteo.sys.sunrise)}
+                </StyledDiv3_>
                 <StyledDiv3_1>Sunrise</StyledDiv3_1>
-                <StyledDiv3_>{favorite.meteo.sys.sunset}</StyledDiv3_>
+                <StyledDiv3_>
+                  {UnixTimeToHour(favorite.meteo.sys.sunset)}
+                </StyledDiv3_>
                 <StyledDiv3_1>Sunset</StyledDiv3_1>
               </div>
             </StyledDiv3>

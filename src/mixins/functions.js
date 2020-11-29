@@ -1,5 +1,5 @@
 const KalvinToCelsius = (K) => {
-  return Math.round((K - 273.5) * 10) / 10;
+  return Math.round(K - 273.5);
 };
 
 const UnixTimeToHour = (UnixTime) => {

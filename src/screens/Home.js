@@ -1,9 +1,65 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
+import { Weather } from "../axios/meteo";
+import { useSelector } from "react-redux";
+import { KalvinToCelsius } from "../mixins/functions";
 
 const Home = () => {
   const { t, i18n } = useTranslation();
+  const coordonnees = useSelector((state) => state.meteo.coordonnees);
+  const appid = useSelector((state) => state.ville.appid);
+  const [vetements, setVetements] = useState({
+    casquette: false,
+    echarpe: false,
+    lunettes_soleil: false,
+    parapluie: false,
+    gants: false,
+    bottes: false,
+    pull: false,
+    manteau: false,
+    short: false,
+    pantalon: false,
+  });
+  useEffect(() => {
+    Weather.get(
+      `?lon=${coordonnees.lon}&lat=${coordonnees.lat}&appid=${appid}`
+    ).then((res) => {
+      /* Traitement de la météo
+       * Données utilisable :
+       * res.data.main.temp
+       * res.data.weather[0].main/humidity
+       * res.data.wind.deg/speed
+       */
+      if (KalvinToCelsius(res.data.main.temp) > 20) {
+        setVetements({ ...vetements, short: true });
+        if (res.data.weather[0].main === "Clear") {
+          setVetements({
+            ...vetements,
+            casquette: true,
+            lunettes_soleil: true,
+          });
+        }
+      } else {
+        setVetements({ ...vetements, pantalon: true, pull: true });
+      }
+      if (KalvinToCelsius(res.data.main.temp) <= 10) {
+        setVetements({ ...vetements, manteau: true, echarpe: true });
+      }
+      if (
+        KalvinToCelsius(res.data.main.temp) <= 0 ||
+        res.data.weather[0].main === "Snow"
+      ) {
+        setVetements({ ...vetements, gants: true });
+      }
+      if (
+        res.data.weather[0].main === "Rain" ||
+        res.data.weather[0].main === "Snow"
+      ) {
+        setVetements({ ...vetements, parapluie: true, bottes: true });
+      }
+    });
+  }, [coordonnees, appid]);
   return (
     <div>
       <StyledDiv>
@@ -11,25 +67,22 @@ const Home = () => {
         <button onClick={() => i18n.changeLanguage("fr")}>FR</button>
         <button onClick={() => i18n.changeLanguage("en")}>EN</button>
         <StyledH1>{t("home.title")}</StyledH1>
-        <StyledText>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque
-          doloremque, dolores exercitationem explicabo iste nihil numquam odit
-          officia tenetur totam. Animi, eveniet ipsa iure laborum maxime modi
-          quam sit sunt. Lorem ipsum dolor sit amet, consectetur adipisicing
-          elit. Amet architecto cupiditate dolores error et facilis incidunt
-          ipsum libero maxime modi molestiae nobis nulla praesentium quo
-          repellat, sapiente tempore velit voluptas?Lorem ipsum dolor sit amet,
-          consectetur adipisicing elit. Distinctio doloribus esse inventore iste
-          maxime nihil sunt? Accusantium consequuntur, dolor, exercitationem
-          impedit inventore laborum minus modi provident rerum, tempora totam
-          voluptatum! Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-          Ducimus ea eligendi enim est eveniet ex, excepturi facere in ipsa,
-          laudantium nam officiis perferendis quae quidem quisquam repellendus
-          rerum soluta vero? Lorem ipsum dolor sit amet, consectetur adipisicing
-          elit. Accusantium eum fuga id iste laudantium magnam nostrum obcaecati
-          pariatur provident, saepe. Ab, architecto consectetur dicta dolorem
-          laborum provident sit vero vitae.
-        </StyledText>
+        <StyledText>{vetements.pantalon}</StyledText>
+        <StyledText>{vetements.short}</StyledText>
+        {vetements.casquette ? <p>Il faut mettre une casquette</p> : ""}
+        {vetements.echarpe ? <p>Il faut mettre une echarpe</p> : ""}
+        {vetements.lunettes_soleil ? (
+          <p>Il faut mettre des lunettes_soleil</p>
+        ) : (
+          ""
+        )}
+        {vetements.parapluie ? <p>Il faut mettre un parapluie</p> : ""}
+        {vetements.gants ? <p>Il faut mettre des gants</p> : ""}
+        {vetements.bottes ? <p>Il faut mettre des bottes</p> : ""}
+        {vetements.pull ? <p>Il faut mettre un pull</p> : ""}
+        {vetements.manteau ? <p>Il faut mettre un manteau</p> : ""}
+        {vetements.short ? <p>Il faut mettre un short ou une jupe</p> : ""}
+        {vetements.pantalon ? <p>Il faut mettre un pantalon</p> : ""}
       </StyledDiv>
     </div>
   );

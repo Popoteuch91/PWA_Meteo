@@ -6,6 +6,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { setSearch } from "../../actions/ville";
 import { getCurrentLocation } from "../../actions/meteo";
 import { useTranslation } from "react-i18next";
+import { ReactComponent as FlagFr } from "../../assets/france.svg";
+import { ReactComponent as FlagEn } from "../../assets/usa.svg";
 
 const Header = () => {
   const { t, i18n } = useTranslation();
@@ -47,6 +49,12 @@ const Header = () => {
               history.push("/search");
             }}
           />
+          <StyledButton onClick={() => i18n.changeLanguage("fr")}>
+            <FlagFr />
+          </StyledButton>
+          <StyledButton onClick={() => i18n.changeLanguage("en")}>
+            <FlagEn />
+          </StyledButton>
         </NavRight>
       </NavHeader>
     </Nav>
@@ -248,6 +256,15 @@ const Input = styled.input`
     &:focus {
       font-size: 1.5rem;
     }
+  }
+`;
+const StyledButton = styled.button`
+  cursor: pointer;
+  background: transparent;
+  border: transparent;
+  svg {
+    width: 2.5rem;
+    height: auto;
   }
 `;
 export default Header;

@@ -154,55 +154,35 @@ const StyledDiv = styled.div`
     margin-bottom: 0.3em;
     padding: 0.8em 0.8em;
     border-radius: 5px;
-    background: linear-gradient(
-      to bottom,
-      rgb(255 136 136) 0%,
-      rgb(255 0 0) 100%
-    );
+    background: #e67d23;
   }
   @media (max-width: 1366px) {
     margin-top: 0.5em;
     margin-bottom: 0.3em;
     padding: 0.8em 0.8em;
     border-radius: 5px;
-    background: linear-gradient(
-      to bottom,
-      rgb(255 136 136) 0%,
-      rgb(255 0 0) 100%
-    );
+    background: #e67d23;
   }
   @media (max-width: 1024px) {
     margin-top: 0.5em;
     margin-bottom: 0.3em;
     padding: 0.8em 0.8em;
     border-radius: 5px;
-    background: linear-gradient(
-      to bottom,
-      rgb(255 136 136) 0%,
-      rgb(255 0 0) 100%
-    );
+    background: #e67d23;
   }
   @media (max-width: 768px) {
     margin-top: 0.5em;
     margin-bottom: 0.3em;
     padding: 0.8em 0.8em;
     border-radius: 5px;
-    background: linear-gradient(
-      to bottom,
-      rgb(255 136 136) 0%,
-      rgb(255 0 0) 100%
-    );
+    background: #e67d23;
   }
   @media (max-width: 375px) {
     margin-top: 1em;
     margin-bottom: 0.3em;
     padding: 0.8em 0.8em;
     border-radius: 5px;
-    background: linear-gradient(
-      to bottom,
-      rgb(255 136 136) 0%,
-      rgb(255 0 0) 100%
-    );
+    background: #e67d23;
   }
 `;
 const StyledDiv1 = styled.div`

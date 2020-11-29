@@ -7,8 +7,10 @@ import { Weather } from "../axios/meteo";
 import { pushFavorites } from "../actions/ville";
 import { KalvinToCelsius, UnixTimeToHour } from "../mixins/functions";
 import styled from "styled-components";
+import { useTranslation } from "react-i18next";
 
 const Search = (props) => {
+  const { t, i18n } = useTranslation();
   const [villes, setVilles] = useState([]);
   const [meteoVilles, setMeteoVilles] = useState([]);
   const dispatch = useDispatch();
@@ -63,27 +65,27 @@ const Search = (props) => {
                 <StyledDiv3_>
                   {KalvinToCelsius(meteoVille.meteo.main.temp_max)}°
                 </StyledDiv3_>
-                <StyledDiv3_1>High</StyledDiv3_1>
+                <StyledDiv3_1>{t("meteo.temp_max")}</StyledDiv3_1>
                 <StyledDiv3_>
                   {KalvinToCelsius(meteoVille.meteo.main.temp_min)}°
                 </StyledDiv3_>
-                <StyledDiv3_1>Low</StyledDiv3_1>
+                <StyledDiv3_1>{t("meteo.temp_min")}</StyledDiv3_1>
               </div>
               <div>
                 <StyledDiv3_>{meteoVille.meteo.wind.speed}mph</StyledDiv3_>
-                <StyledDiv3_1>Wind</StyledDiv3_1>
+                <StyledDiv3_1>{t("meteo.wind")}</StyledDiv3_1>
                 <StyledDiv3_>{meteoVille.meteo.main.humidity}%</StyledDiv3_>
-                <StyledDiv3_1>Humidity</StyledDiv3_1>
+                <StyledDiv3_1>{t("meteo.humidity")}</StyledDiv3_1>
               </div>
               <div>
                 <StyledDiv3_>
                   {UnixTimeToHour(meteoVille.meteo.sys.sunrise)}
                 </StyledDiv3_>
-                <StyledDiv3_1>Sunrise</StyledDiv3_1>
+                <StyledDiv3_1>{t("meteo.sunrise")}</StyledDiv3_1>
                 <StyledDiv3_>
                   {UnixTimeToHour(meteoVille.meteo.sys.sunset)}
                 </StyledDiv3_>
-                <StyledDiv3_1>Sunset</StyledDiv3_1>
+                <StyledDiv3_1>{t("meteo.sunset")}</StyledDiv3_1>
               </div>
             </StyledDiv3>
             <div>
@@ -93,7 +95,7 @@ const Search = (props) => {
                   history.push("/favorite");
                 }}
               >
-                Ajouter à la liste des favoris
+                {t("favorite.add")}
               </StyledButton>
               <StyledButton1
                 onClick={() => {
@@ -106,7 +108,7 @@ const Search = (props) => {
                   history.push("/meteo");
                 }}
               >
-                Afficher cette localisation
+                {t("favorite.set_location")}
               </StyledButton1>
             </div>
           </StyledDiv>

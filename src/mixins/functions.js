@@ -19,15 +19,47 @@ const UnixTimeToDate = (UnixTime) => {
 const UnixTimeToDay = (UnixTime) => {
   const date = new Date(UnixTime * 1000);
   const days = [
-    "Dimanche",
-    "Lundi",
-    "Mardi",
-    "Mercredi",
-    "Jeudi",
-    "Vendredi",
-    "Samedi",
+    "sunday",
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
   ];
   return days[date.getDay()];
 };
 
-export { KalvinToCelsius, UnixTimeToHour, UnixTimeToDate, UnixTimeToDay };
+const UnixTimeToMonth = (UnixTime) => {
+  const date = new Date(UnixTime * 1000);
+  const months = [
+    "january",
+    "february",
+    "march",
+    "april",
+    "may",
+    "june",
+    "july",
+    "august",
+    "september",
+    "october",
+    "november",
+    "december",
+  ];
+  return months[date.getMonth()];
+};
+
+const UnixTimeToDayNumber = (UnixTime) => {
+  const date = new Date(UnixTime * 1000);
+  const day = "0" + date.getDate();
+  return day.substr(-2);
+};
+
+export {
+  KalvinToCelsius,
+  UnixTimeToHour,
+  UnixTimeToDate,
+  UnixTimeToDay,
+  UnixTimeToMonth,
+  UnixTimeToDayNumber,
+};

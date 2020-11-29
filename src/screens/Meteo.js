@@ -8,7 +8,10 @@ import {
   UnixTimeToHour,
   UnixTimeToDate,
   UnixTimeToDay,
+  UnixTimeToMonth,
+  UnixTimeToDayNumber,
 } from "../mixins/functions";
+import { useTranslation } from "react-i18next";
 
 const LoaderBase = () => (
   <Loader
@@ -20,6 +23,7 @@ const LoaderBase = () => (
   />
 );
 const Meteo = () => {
+  const { t, i18n } = useTranslation();
   const [meteo, setMeteo] = useState({});
   const [forecast, setForecast] = useState({});
   const [dailyMeteo, setDailyMeteo] = useState([]);
@@ -52,18 +56,18 @@ const Meteo = () => {
         pMeteo.push(
           <StyledDiv5_1>
             <StyledDiv5_2>
-              {UnixTimeToDay(res.data.list[8 * i - 1].dt)}
+              {t(`week.${UnixTimeToDay(res.data.list[8 * i - 1].dt)}`)}
               <StyledDiv5_3>
                 {UnixTimeToDate(res.data.list[8 * i - 1].dt)}
               </StyledDiv5_3>
             </StyledDiv5_2>
             <StyledDiv5_4>
               {KalvinToCelsius(res.data.list[8 * i - 1].main.temp_min)}°
-              <StyledDiv5_3>Low</StyledDiv5_3>
+              <StyledDiv5_3>{t("meteo.temp_min")}</StyledDiv5_3>
             </StyledDiv5_4>
             <StyledDiv5_4>
               {KalvinToCelsius(res.data.list[8 * i - 1].main.temp_max)}°
-              <StyledDiv5_3>High</StyledDiv5_3>
+              <StyledDiv5_3>{t("meteo.temp_max")}</StyledDiv5_3>
             </StyledDiv5_4>
             <StyledDiv5_5>
               <img
@@ -74,11 +78,11 @@ const Meteo = () => {
             </StyledDiv5_5>
             <StyledDiv5_6>
               {res.data.list[8 * i - 1].main.humidity}%
-              <StyledDiv5_3>Humidity</StyledDiv5_3>
+              <StyledDiv5_3>{t("meteo.humidity")}</StyledDiv5_3>
             </StyledDiv5_6>
             <StyledDiv5_6>
               {res.data.list[8 * i - 1].wind.speed}mph
-              <StyledDiv5_3>Wind</StyledDiv5_3>
+              <StyledDiv5_3>{t("meteo.wind")}</StyledDiv5_3>
             </StyledDiv5_6>
           </StyledDiv5_1>
         );
@@ -99,7 +103,11 @@ const Meteo = () => {
             <StyledH1>
               {meteo.name}, {meteo.sys.country}
             </StyledH1>
-            <StyledText>Sunday 4th August</StyledText>
+            <StyledText>
+              {t(`week.${UnixTimeToDay(meteo.dt)}`)}{" "}
+              {UnixTimeToDayNumber(meteo.dt)}{" "}
+              {t(`month.${UnixTimeToMonth(meteo.dt)}`)}
+            </StyledText>
           </StyledDiv1>
         )}
         {Object.keys(meteo).length === 0 && meteo.constructor === Object ? (
@@ -123,32 +131,32 @@ const Meteo = () => {
           <StyledDiv3>
             <div>
               <StyledDiv3_>{KalvinToCelsius(meteo.main.temp_max)}°</StyledDiv3_>
-              <StyledDiv3_1>High</StyledDiv3_1>
+              <StyledDiv3_1>{t("meteo.temp_max")}</StyledDiv3_1>
               <StyledDiv3_>{KalvinToCelsius(meteo.main.temp_min)}°</StyledDiv3_>
-              <StyledDiv3_1>Low</StyledDiv3_1>
+              <StyledDiv3_1>{t("meteo.temp_min")}</StyledDiv3_1>
             </div>
             <div>
               <StyledDiv3_>{meteo.wind.speed}mph</StyledDiv3_>
-              <StyledDiv3_1>Wind</StyledDiv3_1>
+              <StyledDiv3_1>{t("meteo.wind")}</StyledDiv3_1>
               <StyledDiv3_>{meteo.main.humidity}%</StyledDiv3_>
-              <StyledDiv3_1>Humidity</StyledDiv3_1>
+              <StyledDiv3_1>{t("meteo.humidity")}</StyledDiv3_1>
             </div>
             <div>
               <StyledDiv3_>{UnixTimeToHour(meteo.sys.sunrise)}</StyledDiv3_>
-              <StyledDiv3_1>Sunrise</StyledDiv3_1>
+              <StyledDiv3_1>{t("meteo.sunrise")}</StyledDiv3_1>
               <StyledDiv3_>{UnixTimeToHour(meteo.sys.sunset)}</StyledDiv3_>
-              <StyledDiv3_1>Sunset</StyledDiv3_1>
+              <StyledDiv3_1>{t("meteo.sunset")}</StyledDiv3_1>
             </div>
           </StyledDiv3>
         )}
         <StyledDiv4>
-          <StyledH2>La météo du jour</StyledH2>
+          <StyledH2>{t("meteo.meteo_day")}</StyledH2>
           <StyledDiv4_>
             {dailyMeteo.length === 0 ? <LoaderBase /> : dailyMeteo}
           </StyledDiv4_>
         </StyledDiv4>
         <StyledDiv5>
-          <StyledH2_>Les jours à venir</StyledH2_>
+          <StyledH2_>{t("meteo.meteo_forecast")}</StyledH2_>
           {previsionsMeteo.length === 0 ? (
             <LoaderBase />
           ) : (

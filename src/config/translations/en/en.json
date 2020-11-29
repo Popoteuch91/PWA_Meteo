@@ -1,0 +1,54 @@
+{
+  "translation": {
+    "menu": "Menu en anglais",
+    "header": {
+      "home": "Home",
+      "meteo": "Meteo",
+      "favorite": "Favorites",
+      "search": "Search..."
+    },
+    "home": {
+      "title": "Home page"
+    },
+    "meteo": {
+      "title": "",
+      "temp_min": "Min.",
+      "temp_max": "Max.",
+      "humidity": "Humidity",
+      "wind": "Wind",
+      "sunset": "sunset",
+      "sunrise": "sunrise",
+      "meteo_day": "Today's meteo",
+      "meteo_forecast": "Forecast meteo"
+    },
+    "favorite": {
+      "title": "",
+      "remove": "Remove from favorites",
+      "add": "Add to favorites",
+      "set_location": "Set as location"
+    },
+    "week": {
+      "monday": "Monday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday",
+      "saturday": "Saturday",
+      "sunday": "Sunday"
+    },
+    "month": {
+      "january": "January",
+      "february": "february",
+      "march": "March",
+      "april": "April",
+      "may": "May",
+      "june": "June",
+      "july": "July",
+      "august": "August",
+      "september": "September",
+      "october": "October",
+      "november": "November",
+      "december": "December"
+    }
+  }
+}

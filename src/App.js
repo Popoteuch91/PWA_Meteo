@@ -10,6 +10,7 @@ import "./App.css";
 import Header from "./components/header";
 import Footer from "./components/footer";
 import Routes from "./config/router";
+import "./config/translations";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import {

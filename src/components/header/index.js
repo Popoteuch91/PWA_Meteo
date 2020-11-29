@@ -5,8 +5,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelector, useDispatch } from "react-redux";
 import { setSearch } from "../../actions/ville";
 import { getCurrentLocation } from "../../actions/meteo";
+import { useTranslation } from "react-i18next";
 
 const Header = () => {
+  const { t, i18n } = useTranslation();
   const history = useHistory();
   const dispatch = useDispatch();
   const search = useSelector((state) => state.ville.search);
@@ -16,15 +18,15 @@ const Header = () => {
         <NavLeft>
           <MenuLink to="/home">
             <FontAwesomeIcon icon="home" size="2x" />
-            <StyledComp>Accueil</StyledComp>
+            <StyledComp>{t("header.home")}</StyledComp>
           </MenuLink>
           <MenuLink to="/meteo">
             <FontAwesomeIcon icon="cloud-moon" size="2x" />
-            <StyledComp>Météo</StyledComp>
+            <StyledComp>{t("header.meteo")}</StyledComp>
           </MenuLink>
           <MenuLink to="/favorite">
             <FontAwesomeIcon icon="star" size="2x" />
-            <StyledComp>Favoris</StyledComp>
+            <StyledComp>{t("header.favorite")}</StyledComp>
           </MenuLink>
         </NavLeft>
         <NavRight>
@@ -38,7 +40,7 @@ const Header = () => {
           />
           <Input
             type="text"
-            placeholder="Search"
+            placeholder={t("header.search")}
             value={search}
             onChange={(event) => {
               dispatch(setSearch(event.target.value));

@@ -4,8 +4,10 @@ import styled from "styled-components";
 import { removeFavorite } from "../actions/ville";
 import { Weather } from "../axios/meteo";
 import { KalvinToCelsius, UnixTimeToHour } from "../mixins/functions";
+import { useTranslation } from "react-i18next";
 
 const Favorite = () => {
+  const { t, i18n } = useTranslation();
   const [meteoVilles, setMeteoVilles] = useState([]);
   const favorites = useSelector((state) => state.ville.favorites);
   const dispatch = useDispatch();
@@ -49,27 +51,27 @@ const Favorite = () => {
                 <StyledDiv3_>
                   {KalvinToCelsius(favorite.meteo.main.temp_max)}°
                 </StyledDiv3_>
-                <StyledDiv3_1>High</StyledDiv3_1>
+                <StyledDiv3_1>{t("meteo.temp_max")}</StyledDiv3_1>
                 <StyledDiv3_>
                   {KalvinToCelsius(favorite.meteo.main.temp_min)}°
                 </StyledDiv3_>
-                <StyledDiv3_1>Low</StyledDiv3_1>
+                <StyledDiv3_1>{t("meteo.temp_min")}</StyledDiv3_1>
               </div>
               <div>
                 <StyledDiv3_>{favorite.meteo.wind.speed}mph</StyledDiv3_>
-                <StyledDiv3_1>Wind</StyledDiv3_1>
+                <StyledDiv3_1>{t("meteo.wind")}</StyledDiv3_1>
                 <StyledDiv3_>{favorite.meteo.main.humidity}%</StyledDiv3_>
-                <StyledDiv3_1>Humidity</StyledDiv3_1>
+                <StyledDiv3_1>{t("meteo.humidity")}</StyledDiv3_1>
               </div>
               <div>
                 <StyledDiv3_>
                   {UnixTimeToHour(favorite.meteo.sys.sunrise)}
                 </StyledDiv3_>
-                <StyledDiv3_1>Sunrise</StyledDiv3_1>
+                <StyledDiv3_1>{t("meteo.sunrise")}</StyledDiv3_1>
                 <StyledDiv3_>
                   {UnixTimeToHour(favorite.meteo.sys.sunset)}
                 </StyledDiv3_>
-                <StyledDiv3_1>Sunset</StyledDiv3_1>
+                <StyledDiv3_1>{t("meteo.sunset")}</StyledDiv3_1>
               </div>
             </StyledDiv3>
             <StyledButton
@@ -78,7 +80,7 @@ const Favorite = () => {
                 window.location.reload(); // Temporaire
               }}
             >
-              Retirer à la liste des favoris
+              {t("favorite.remove")}
             </StyledButton>
           </StyledDiv>
         );

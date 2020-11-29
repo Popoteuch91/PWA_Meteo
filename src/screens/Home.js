@@ -1,11 +1,16 @@
 import React from "react";
 import styled from "styled-components";
+import { useTranslation } from "react-i18next";
 
 const Home = () => {
+  const { t, i18n } = useTranslation();
   return (
     <div>
       <StyledDiv>
-        <StyledH1>Home Page</StyledH1>
+        <p>{t("menu")}</p>
+        <button onClick={() => i18n.changeLanguage("fr")}>FR</button>
+        <button onClick={() => i18n.changeLanguage("en")}>EN</button>
+        <StyledH1>{t("home.title")}</StyledH1>
         <StyledText>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque
           doloremque, dolores exercitationem explicabo iste nihil numquam odit

@@ -27,7 +27,6 @@ const initialState = {
 };
 
 const export_ville = (state = initialState, action) => {
-  let favArray = state.favorites;
   switch (action.type) {
     case SET_SEARCH:
       return {
@@ -35,16 +34,16 @@ const export_ville = (state = initialState, action) => {
         search: action.payload,
       };
     case PUSH_FAVORITES:
-      favArray.push(action.payload);
       return {
         ...state,
-        favorites: favArray,
+        favorites: [...state.favorites, action.payload],
       };
     case REMOVE_FAVORITE:
-      favArray.splice(action.payload, 1);
       return {
         ...state,
-        favorites: favArray,
+        favorites: state.favorites.filter(
+          (favorite, idFavorite) => idFavorite !== action.payload
+        ),
       };
     default:
       return state;

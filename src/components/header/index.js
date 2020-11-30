@@ -6,16 +6,24 @@ import { useSelector, useDispatch } from "react-redux";
 import { setSearch } from "../../actions/ville";
 import { getCurrentLocation } from "../../actions/meteo";
 import { useTranslation } from "react-i18next";
+import Toggle from "../toggle";
+import { switchTheme, displayTheme } from "../../actions/theme";
 
 const Header = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const history = useHistory();
   const dispatch = useDispatch();
   const search = useSelector((state) => state.ville.search);
+  const theme = useSelector((state) => state.theme.mode);
+  const themeInverse = theme === "light" ? "dark" : "light";
   return (
     <Nav>
       <NavHeader>
         <NavLeft>
+          <Toggle
+            theme={theme}
+            toggleTheme={() => dispatch(displayTheme(themeInverse))}
+          />
           <MenuLink to="/home">
             <FontAwesomeIcon icon="home" size="2x" />
             <StyledComp>{t("header.home")}</StyledComp>

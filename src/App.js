@@ -1,6 +1,6 @@
-import React from "react";
-import { Provider } from "react-redux";
-import Store from "./config/store";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { persistor } from "./config/store";
 import { PersistGate } from "redux-persist/integration/react";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { useDarkMode } from "./actions/useDarkMode";
@@ -45,27 +45,20 @@ export const GlobalStyles = createGlobalStyle`
   }
 `;
 function App() {
-  const [theme, toggleTheme, componentMounted] = useDarkMode();
+  const theme = useSelector((state) => state.theme.mode);
   const themeMode = theme === "light" ? lightTheme : darkTheme;
 
-  if (!componentMounted) {
-    return <div />;
-  }
-
   return (
-    <Provider store={Store().store}>
-      <PersistGate loading={null} persistor={Store().persistor}>
-        <ThemeProvider theme={themeMode}>
-          <>
-            <GlobalStyles />
-            <Toggle theme={theme} toggleTheme={toggleTheme} />
-            <Header />
-            <Routes />
-            <Footer />
-          </>
-        </ThemeProvider>
-      </PersistGate>
-    </Provider>
+    <PersistGate loading={null} persistor={persistor}>
+      <ThemeProvider theme={themeMode}>
+        <>
+          <GlobalStyles />
+          <Header />
+          <Routes />
+          <Footer />
+        </>
+      </ThemeProvider>
+    </PersistGate>
   );
 }
 

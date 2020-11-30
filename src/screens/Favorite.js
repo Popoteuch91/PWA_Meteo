@@ -9,9 +9,13 @@ import { useTranslation } from "react-i18next";
 const Favorite = () => {
   const { t, i18n } = useTranslation();
   const [meteoVilles, setMeteoVilles] = useState([]);
-  const favorites = useSelector((state) => state.ville.favorites);
+  const useFavorites = useSelector((state) => state.ville.favorites);
+  const [favorites, setFavorites] = useState(useFavorites);
   const dispatch = useDispatch();
   const appid = useSelector((state) => state.ville.appid);
+  useEffect(() => {
+    setFavorites(useFavorites);
+  }, [useFavorites]);
   useEffect(() => {
     if (favorites.length === 0) return setMeteoVilles([]);
     let majMeteoVilles = favorites;
@@ -77,7 +81,6 @@ const Favorite = () => {
             <StyledButton
               onClick={() => {
                 dispatch(removeFavorite(idFavorite));
-                window.location.reload(); // Temporaire
               }}
             >
               {t("favorite.remove")}

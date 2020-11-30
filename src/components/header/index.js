@@ -12,7 +12,7 @@ import { ReactComponent as FlagFr } from "../../assets/france.svg";
 import { ReactComponent as FlagEn } from "../../assets/usa.svg";
 
 const Header = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const history = useHistory();
   const dispatch = useDispatch();
   const search = useSelector((state) => state.ville.search);

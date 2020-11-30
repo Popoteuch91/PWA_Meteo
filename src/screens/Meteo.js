@@ -322,7 +322,7 @@ const StyledDiv4_1 = styled.div`
   padding: 0.8em 0;
   width: 13%;
   border-radius: 5px;
-  /*background-color: rgba(0, 0, 0, 0.15);/*
+  background-color: rgba(0, 0, 0, 0.15);
   font-size: 1.125em;
   text-align: center;
   /*@media screen and (min-width: 880px) {
@@ -359,7 +359,7 @@ const StyledDiv5_1 = styled.div`
   padding: 0.8em 0;
   width: 100%;
   border-radius: 5px;
-  /*background-color: rgba(0, 0, 0, 0.2);*/
+  background-color: rgba(0, 0, 0, 0.2);
   font-size: 1.19em;
   text-align: center;
 `;

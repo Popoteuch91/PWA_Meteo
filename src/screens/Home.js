@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { KalvinToCelsius } from "../mixins/functions";
 
 const Home = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const coordonnees = useSelector((state) => state.meteo.coordonnees);
   const appid = useSelector((state) => state.ville.appid);
   const [vetements, setVetements] = useState({
@@ -63,9 +63,6 @@ const Home = () => {
   return (
     <div>
       <StyledDiv>
-        <p>{t("menu")}</p>
-        <button onClick={() => i18n.changeLanguage("fr")}>FR</button>
-        <button onClick={() => i18n.changeLanguage("en")}>EN</button>
         <StyledH1>{t("home.title")}</StyledH1>
         <StyledText>{vetements.pantalon}</StyledText>
         <StyledText>{vetements.short}</StyledText>

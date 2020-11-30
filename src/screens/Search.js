@@ -183,35 +183,35 @@ const StyledDiv = styled.div`
     margin-bottom: 0.3em;
     padding: 0.8em 0.8em;
     border-radius: 5px;
-    background: linear-gradient(to bottom, rgb(0 0 0) 0%, rgb(7 113 177) 100%);
+    background: #e67d23;
   }
   @media (max-width: 1366px) {
     margin-top: 0.5em;
     margin-bottom: 0.3em;
     padding: 0.8em 0.8em;
     border-radius: 5px;
-    background: linear-gradient(to bottom, rgb(0 0 0) 0%, rgb(7 113 177) 100%);
+    background: #e67d23;
   }
   @media (max-width: 1024px) {
     margin-top: 0.5em;
     margin-bottom: 0.3em;
     padding: 0.8em 0.8em;
     border-radius: 5px;
-    background: linear-gradient(to bottom, rgb(0 0 0) 0%, rgb(7 113 177) 100%);
+    background: #e67d23;
   }
   @media (max-width: 768px) {
     margin-top: 0.5em;
     margin-bottom: 0.3em;
     padding: 0.8em 0.8em;
     border-radius: 5px;
-    background: linear-gradient(to bottom, rgb(0 0 0) 0%, rgb(7 113 177) 100%);
+    background: #e67d23;
   }
   @media (max-width: 375px) {
     margin-top: 1em;
     margin-bottom: 0.3em;
     padding: 0.8em 0.8em;
     border-radius: 5px;
-    background: linear-gradient(to bottom, rgb(0 0 0) 0%, rgb(7 113 177) 100%);
+    background: #e67d23;
   }
 `;
 const StyledDiv1 = styled.div`
@@ -295,7 +295,7 @@ const StyledButton = styled.button`
   text-transform: uppercase;
 `;
 const StyledButton1 = styled.button`
-  background: #ffa500;
+  background: #7e8c8d;
   color: white;
   font-size: 15px;
   padding: 10px 30px;

@@ -23,21 +23,12 @@ import {
 
 library.add(fab, faHome, faCloudMoon, faStar, faMapMarkerAlt, faSearch);
 export const GlobalStyles = createGlobalStyle`
-  *,
-  *::after,
-  *::before {
-    box-sizing: border-box;
-  }
   body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100vh;
+    
+
     background: ${({ theme }) => theme.body};
-    color: ${({ theme }) => theme.text};
     color: ${({ theme }) => theme.p};
-    padding: 0;
-    margin: 0;
+
     transition: all 0.25s linear;
   } 
   a {

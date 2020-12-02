@@ -22,10 +22,6 @@ const Header = () => {
     <Nav>
       <NavHeader>
         <NavLeft>
-          <Toggle
-            theme={theme}
-            toggleTheme={() => dispatch(displayTheme(themeInverse))}
-          />
           <MenuLink to="/home">
             <FontAwesomeIcon icon="home" size="2x" />
             <StyledComp>{t("header.home")}</StyledComp>
@@ -63,6 +59,10 @@ const Header = () => {
           <StyledButton onClick={() => i18n.changeLanguage("en")}>
             <FlagEn />
           </StyledButton>
+          <Toggle
+            theme={theme}
+            toggleTheme={() => dispatch(displayTheme(themeInverse))}
+          />
         </NavRight>
       </NavHeader>
     </Nav>
@@ -72,22 +72,12 @@ const Header = () => {
 const Nav = styled.div`
   background-color: #fff;
   border-bottom: 1px solid;
-  width: 100%;
-  top: 0;
-  position: fixed;
-  background: white;
 
   @media (max-width: 1366px) {
-    width: 100%;
-    top: 0;
-    position: fixed;
-    background: white;
+    border-bottom: none;
   }
   @media (max-width: 1024px) {
-    width: 100%;
-    top: 0;
-    position: fixed;
-    background: white;
+    border-bottom: none;
   }
   @media (max-width: 768px) {
     border-bottom: none;
@@ -98,7 +88,7 @@ const Nav = styled.div`
 `;
 const NavHeader = styled.div`
   /*max-width: 90%;*/
-  padding: 20px 20px;
+  padding: 10px 20px;
   display: flex;
   align-items: center;
   margin: 0 auto;
@@ -119,8 +109,14 @@ const NavLeft = styled.div`
   width: 40%;
   text-align: center;
   @media (max-width: 1024px) {
-    width: 50%;
+    width: 100%;
     text-align: center;
+    height: 60px;
+    position: fixed;
+    bottom: 0;
+    border-top: 1px solid black;
+    padding-top: 4%;
+    background: white;
   }
   @media (max-width: 768px) {
     width: 100%;
@@ -191,9 +187,18 @@ const StyledComp = styled.span`
 const NavRight = styled.div`
   width: 60%;
   text-align: left;
+  @media (max-width: 1366px) {
+    width: 40%;
+  }
   @media (max-width: 1024px) {
-    width: 50%;
-    text-align: center;
+    width: 100%;
+    height: 60px;
+    position: fixed;
+    top: 0;
+    border-bottom: 1px solid black;
+    padding-top: 4%;
+    background: white;
+    margin: 0;
   }
   @media (max-width: 768px) {
     width: 100%;
@@ -217,7 +222,7 @@ const NavRight = styled.div`
   }
 `;
 const Input = styled.input`
-  width: 80%;
+  width: 65%;
   font-size: 16px;
   border: solid 1px #dbdbdb;
   border-radius: 3px;

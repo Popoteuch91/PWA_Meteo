@@ -7,19 +7,17 @@ import { ReactComponent as SunIcon } from "../../assets/sun.svg";
 
 const ToggleContainer = styled.button`
   position: relative;
-  display: flex;
+  display: inline-flex;
   justify-content: space-between;
   background: ${({ theme }) => theme.gradient};
   width: 8rem;
   height: 3.5rem;
-  margin: 0 auto;
+  margin-left: 1%;
   border-radius: 30px;
   border: 2px solid ${({ theme }) => theme.toggleBorder};
-  font-size: 0.5rem;
   padding: 0.5rem;
   overflow: hidden;
   cursor: pointer;
-  margin-top: 50%;
   svg {
     width: 2.5rem;
     height: auto;

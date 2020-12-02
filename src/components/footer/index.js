@@ -22,7 +22,9 @@ const StyledDiv = styled.div`
   padding: 30px 0;
   background-color: black;
   text-align: center;
-
+  @media (max-width: 1024px) {
+    display: none;
+  }
   @media (max-width: 768px) {
     display: none;
   }

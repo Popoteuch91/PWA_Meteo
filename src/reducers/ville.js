@@ -42,7 +42,7 @@ const export_ville = (state = initialState, action) => {
       return {
         ...state,
         favorites: state.favorites.filter(
-          (favorite, idFavorite) => idFavorite !== action.payload
+          (favorite) => favorite.properties.id !== action.payload
         ),
       };
     default:

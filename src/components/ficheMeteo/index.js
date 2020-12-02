@@ -1,87 +1,115 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { KalvinToCelsius, UnixTimeToHour } from "../../mixins/functions";
-import { pushFavorites } from "../../actions/ville";
+import { pushFavorites, removeFavorite } from "../../actions/ville";
 import { displayCoordonnees } from "../../actions/meteo";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { Weather } from "../../axios/meteo";
+import LoaderBase from "../loaderBase";
+import { VilleIsFavorite, VilleIsLocalition } from "../../mixins/functions";
 
 const FicheMeteo = (props) => {
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
   const history = useHistory();
-  return (
-    <StyledDiv>
-      <StyledDiv1>
-        <StyledH1>{props.ville.properties.label}</StyledH1>
-      </StyledDiv1>
-      <StyledDiv2>
-        <StyledDiv2_>
-          <img
-            src={`http://openweathermap.org/img/wn/${props.ville.meteo.weather[0].icon}@2x.png`}
-          />
-        </StyledDiv2_>
-        <StyledDiv2_1>
-          <StyledDiv2_2>
-            {KalvinToCelsius(props.ville.meteo.main.temp)}°
-          </StyledDiv2_2>
-          <StyledDiv2_3>{props.ville.meteo.weather[0].main}</StyledDiv2_3>
-        </StyledDiv2_1>
-      </StyledDiv2>
-      <StyledDiv3>
+  const appid = useSelector((state) => state.ville.appid);
+  const [meteo, setMeteo] = useState({});
+  const favorites = useSelector((state) => state.ville.favorites);
+  const coordonnees = useSelector((state) => state.meteo.coordonnees);
+  useEffect(() => {
+    Weather.get(
+      `?lon=${props.ville.geometry.coordinates[0]}&lat=${props.ville.geometry.coordinates[1]}&appid=${appid}`
+    ).then((res) => {
+      setMeteo(res.data);
+    });
+  }, [props.ville, appid]);
+  if (Object.keys(meteo).length === 0 && meteo.constructor === Object)
+    return <LoaderBase />;
+  else
+    return (
+      <StyledDiv>
+        <StyledDiv1>
+          <StyledH1>{props.ville.properties.label}</StyledH1>
+        </StyledDiv1>
+        <StyledDiv2>
+          <StyledDiv2Img>
+            <img
+              src={`http://openweathermap.org/img/wn/${meteo.weather[0].icon}@2x.png`}
+            />
+          </StyledDiv2Img>
+          <StyledDiv2Temp>
+            <StyledDiv2TempVal>
+              {KalvinToCelsius(meteo.main.temp)}°
+            </StyledDiv2TempVal>
+            <StyledDiv2TempState>{meteo.weather[0].main}</StyledDiv2TempState>
+          </StyledDiv2Temp>
+        </StyledDiv2>
+        <StyledDiv3>
+          <div>
+            <StyledDiv3Val>
+              {KalvinToCelsius(meteo.main.temp_max)}°
+            </StyledDiv3Val>
+            <StyledDiv3Label>{t("meteo.temp_max")}</StyledDiv3Label>
+            <StyledDiv3Val>
+              {KalvinToCelsius(meteo.main.temp_min)}°
+            </StyledDiv3Val>
+            <StyledDiv3Label>{t("meteo.temp_min")}</StyledDiv3Label>
+          </div>
+          <div>
+            <StyledDiv3Val>{meteo.wind.speed}mph</StyledDiv3Val>
+            <StyledDiv3Label>{t("meteo.wind")}</StyledDiv3Label>
+            <StyledDiv3Val>{meteo.main.humidity}%</StyledDiv3Val>
+            <StyledDiv3Label>{t("meteo.humidity")}</StyledDiv3Label>
+          </div>
+          <div>
+            <StyledDiv3Val>{UnixTimeToHour(meteo.sys.sunrise)}</StyledDiv3Val>
+            <StyledDiv3Label>{t("meteo.sunrise")}</StyledDiv3Label>
+            <StyledDiv3Val>{UnixTimeToHour(meteo.sys.sunset)}</StyledDiv3Val>
+            <StyledDiv3Label>{t("meteo.sunset")}</StyledDiv3Label>
+          </div>
+        </StyledDiv3>
         <div>
-          <StyledDiv3_>
-            {KalvinToCelsius(props.ville.meteo.main.temp_max)}°
-          </StyledDiv3_>
-          <StyledDiv3_1>{t("meteo.temp_max")}</StyledDiv3_1>
-          <StyledDiv3_>
-            {KalvinToCelsius(props.ville.meteo.main.temp_min)}°
-          </StyledDiv3_>
-          <StyledDiv3_1>{t("meteo.temp_min")}</StyledDiv3_1>
+          {VilleIsFavorite(favorites, props.ville.properties.id) ? (
+            <StyledButton
+              onClick={() => {
+                dispatch(removeFavorite(props.ville.properties.id));
+              }}
+            >
+              {t("favorite.remove")}
+            </StyledButton>
+          ) : (
+            <StyledButton
+              onClick={() => {
+                dispatch(pushFavorites(props.ville));
+                history.push("/favorite");
+              }}
+            >
+              {t("favorite.add")}
+            </StyledButton>
+          )}
+
+          {VilleIsLocalition(coordonnees, props.ville.geometry.coordinates) ? (
+            ""
+          ) : (
+            <StyledButton1
+              onClick={() => {
+                dispatch(
+                  displayCoordonnees({
+                    lon: props.ville.geometry.coordinates[0],
+                    lat: props.ville.geometry.coordinates[1],
+                  })
+                );
+                history.push("/meteo");
+              }}
+            >
+              {t("favorite.set_location")}
+            </StyledButton1>
+          )}
         </div>
-        <div>
-          <StyledDiv3_>{props.ville.meteo.wind.speed}mph</StyledDiv3_>
-          <StyledDiv3_1>{t("meteo.wind")}</StyledDiv3_1>
-          <StyledDiv3_>{props.ville.meteo.main.humidity}%</StyledDiv3_>
-          <StyledDiv3_1>{t("meteo.humidity")}</StyledDiv3_1>
-        </div>
-        <div>
-          <StyledDiv3_>
-            {UnixTimeToHour(props.ville.meteo.sys.sunrise)}
-          </StyledDiv3_>
-          <StyledDiv3_1>{t("meteo.sunrise")}</StyledDiv3_1>
-          <StyledDiv3_>
-            {UnixTimeToHour(props.ville.meteo.sys.sunset)}
-          </StyledDiv3_>
-          <StyledDiv3_1>{t("meteo.sunset")}</StyledDiv3_1>
-        </div>
-      </StyledDiv3>
-      <div>
-        <StyledButton
-          onClick={() => {
-            dispatch(pushFavorites(props.ville));
-            history.push("/favorite");
-          }}
-        >
-          {t("favorite.add")}
-        </StyledButton>
-        <StyledButton1
-          onClick={() => {
-            dispatch(
-              displayCoordonnees({
-                lon: props.ville.geometry.coordinates[0],
-                lat: props.ville.geometry.coordinates[1],
-              })
-            );
-            history.push("/meteo");
-          }}
-        >
-          {t("favorite.set_location")}
-        </StyledButton1>
-      </div>
-    </StyledDiv>
-  );
+      </StyledDiv>
+    );
 };
 
 const StyledDiv = styled.div`
@@ -142,25 +170,25 @@ const StyledDiv2 = styled.div`
     width: 50%;
   }
 `;
-const StyledDiv2_ = styled.div`
+const StyledDiv2Img = styled.div`
   flex-grow: 1.25;
   text-align: center;
   img {
     width: 10.5em;
   }
 `;
-const StyledDiv2_1 = styled.div`
+const StyledDiv2Temp = styled.div`
   flex-grow: 1;
   text-align: center;
 `;
-const StyledDiv2_2 = styled.div`
+const StyledDiv2TempVal = styled.div`
   font-size: 5.25em;
   font-weight: 300;
   @media (max-width: 375px) {
     font-size: 3.25em;
   }
 `;
-const StyledDiv2_3 = styled.div`
+const StyledDiv2TempState = styled.div`
   margin-top: 0em;
   margin-left: 0em;
   text-align: center;
@@ -184,11 +212,11 @@ const StyledDiv3 = styled.div`
     width: 50%;
   }
 `;
-const StyledDiv3_ = styled.div`
+const StyledDiv3Val = styled.div`
   margin-top: 1em;
   font-size: 1.44em;
 `;
-const StyledDiv3_1 = styled.div`
+const StyledDiv3Label = styled.div`
   /*color: rgba(255, 255, 255, 0.8);*/
   @media screen and (min-width: 700px) {
     display: block;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import Loader from "react-loader-spinner";
+import LoaderBase from "../components/loaderBase";
 import { Weather, Forecast } from "../axios/meteo";
 import {
   KalvinToCelsius,
@@ -13,15 +13,6 @@ import {
 } from "../mixins/functions";
 import { useTranslation } from "react-i18next";
 
-const LoaderBase = () => (
-  <Loader
-    type="TailSpin"
-    color="#00BFFF"
-    height={100}
-    width={100}
-    timeout={30000} // 30 secs
-  />
-);
 const Meteo = () => {
   const { t, i18n } = useTranslation();
   const [meteo, setMeteo] = useState({});

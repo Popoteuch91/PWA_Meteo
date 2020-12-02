@@ -1,37 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { displayCoordonnees } from "../actions/meteo";
+import { useSelector } from "react-redux";
 import axios_ville from "../axios/ville";
-import { Weather } from "../axios/meteo";
-import { pushFavorites } from "../actions/ville";
-import { KalvinToCelsius, UnixTimeToHour } from "../mixins/functions";
 import styled from "styled-components";
-import { useTranslation } from "react-i18next";
 import FicheMeteo from "../components/ficheMeteo";
 
-const Search = (props) => {
-  const { t, i18n } = useTranslation();
+const Search = () => {
   const [villes, setVilles] = useState([]);
-  const [meteoVilles, setMeteoVilles] = useState([]);
-  const dispatch = useDispatch();
-  const history = useHistory();
   const search = useSelector((state) => state.ville.search);
-  const appid = useSelector((state) => state.ville.appid);
-
-  useEffect(() => {
-    if (villes.length === 0) return setMeteoVilles([]);
-    let majMeteoVilles = villes;
-    const requests = villes.map((ville, idVille) =>
-      Weather.get(
-        `?lon=${ville.geometry.coordinates[0]}&lat=${ville.geometry.coordinates[1]}&appid=${appid}`
-      )
-    );
-    Promise.all(requests).then((res) => {
-      res.map((meteo, idVille) => (majMeteoVilles[idVille].meteo = meteo.data));
-      setMeteoVilles(majMeteoVilles);
-    });
-  }, [villes, appid]);
 
   useEffect(() => {
     if (search.length >= 1) {
@@ -42,7 +17,7 @@ const Search = (props) => {
   }, [search]);
   return (
     <StyledMain>
-      {meteoVilles.map((ville) => {
+      {villes.map((ville) => {
         return <FicheMeteo ville={ville}></FicheMeteo>;
       })}
     </StyledMain>

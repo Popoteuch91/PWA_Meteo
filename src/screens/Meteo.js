@@ -310,58 +310,5 @@ const StyledDiv5_ = styled.div`
   display: flex;
   flex-wrap: wrap;
 `;
-const StyledDiv5_1 = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
-  margin-bottom: 0.3em;
-  padding: 0.8em 0;
-  width: 100%;
-  border-radius: 5px;
-  background-color: rgba(0, 0, 0, 0.2);
-  font-size: 1.19em;
-  text-align: center;
-`;
-const StyledDiv5_2 = styled.div`
-  width: 33.33333%;
-  font-size: 0.95em;
-  margin-bottom: 0.6em;
-  @media screen and (min-width: 450px) {
-    width: 16.666666%;
-    margin-bottom: initial;
-    order: -2;
-  }
-`;
-const StyledDiv5_3 = styled.div`
-  /*color: rgba(255, 255, 255, 0.6);*/
-  font-size: 0.83em;
-`;
-const StyledDiv5_4 = styled.div`
-  width: 33.33333%;
-  font-size: 0.95em;
-  margin-bottom: 0.6em;
-  @media screen and (min-width: 450px) {
-    width: 16.666666%;
-    margin-bottom: initial;
-  }
-`;
-const StyledDiv5_5 = styled.div`
-  width: 33.33333%;
-  font-size: 0.95em;
-  @media screen and (min-width: 450px) {
-    width: 16.666666%;
-    margin-bottom: initial;
-    order: -1;
-  }
-`;
-const StyledDiv5_6 = styled.div`
-  width: 33.33333%;
-  font-size: 0.95em;
-  @media screen and (min-width: 450px) {
-    width: 16.666666%;
-    margin-bottom: initial;
-  }
-`;
 
 export default Meteo;

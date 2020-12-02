@@ -12,11 +12,11 @@ import {
   UnixTimeToDayNumber,
 } from "../mixins/functions";
 import { useTranslation } from "react-i18next";
+import ForecastMeteo from "../components/forecastMeteo";
 
 const Meteo = () => {
   const { t, i18n } = useTranslation();
   const [meteo, setMeteo] = useState({});
-  const [forecast, setForecast] = useState({});
   const [dailyMeteo, setDailyMeteo] = useState([]);
   const [previsionsMeteo, setPrevisionsMeteo] = useState([]);
   const coordonnees = useSelector((state) => state.meteo.coordonnees);
@@ -45,42 +45,11 @@ const Meteo = () => {
       let pMeteo = [];
       for (let i = 1; i <= 5; i++) {
         pMeteo.push(
-          <StyledDiv5_1>
-            <StyledDiv5_2>
-              {t(`week.${UnixTimeToDay(res.data.list[8 * i - 1].dt)}`)}
-              <StyledDiv5_3>
-                {UnixTimeToDate(res.data.list[8 * i - 1].dt)}
-              </StyledDiv5_3>
-            </StyledDiv5_2>
-            <StyledDiv5_4>
-              {KalvinToCelsius(res.data.list[8 * i - 1].main.temp_min)}°
-              <StyledDiv5_3>{t("meteo.temp_min")}</StyledDiv5_3>
-            </StyledDiv5_4>
-            <StyledDiv5_4>
-              {KalvinToCelsius(res.data.list[8 * i - 1].main.temp_max)}°
-              <StyledDiv5_3>{t("meteo.temp_max")}</StyledDiv5_3>
-            </StyledDiv5_4>
-            <StyledDiv5_5>
-              <img
-                src={`http://openweathermap.org/img/wn/${
-                  res.data.list[8 * i - 1].weather[0].icon
-                }@2x.png`}
-              />
-            </StyledDiv5_5>
-            <StyledDiv5_6>
-              {res.data.list[8 * i - 1].main.humidity}%
-              <StyledDiv5_3>{t("meteo.humidity")}</StyledDiv5_3>
-            </StyledDiv5_6>
-            <StyledDiv5_6>
-              {res.data.list[8 * i - 1].wind.speed}mph
-              <StyledDiv5_3>{t("meteo.wind")}</StyledDiv5_3>
-            </StyledDiv5_6>
-          </StyledDiv5_1>
+          <ForecastMeteo meteo={res.data} iterator={i}></ForecastMeteo>
         );
       }
       setPrevisionsMeteo(pMeteo);
       setDailyMeteo(dMeteo);
-      setForecast(res.data);
     });
   }, [coordonnees, appid]);
 

@@ -71,23 +71,27 @@ const FicheMeteo = (props) => {
           </div>
         </StyledDiv3>
         <div>
-          {VilleIsFavorite(favorites, props.ville.properties.id) ? (
-            <StyledButton
-              onClick={() => {
-                dispatch(removeFavorite(props.ville.properties.id));
-              }}
-            >
-              {t("favorite.remove")}
-            </StyledButton>
+          {props.ville.properties.id !== 0 ? (
+            VilleIsFavorite(favorites, props.ville.properties.id) ? (
+              <StyledButton
+                onClick={() => {
+                  dispatch(removeFavorite(props.ville.properties.id));
+                }}
+              >
+                {t("favorite.remove")}
+              </StyledButton>
+            ) : (
+              <StyledButton
+                onClick={() => {
+                  dispatch(pushFavorites(props.ville));
+                  history.push("/favorite");
+                }}
+              >
+                {t("favorite.add")}
+              </StyledButton>
+            )
           ) : (
-            <StyledButton
-              onClick={() => {
-                dispatch(pushFavorites(props.ville));
-                history.push("/favorite");
-              }}
-            >
-              {t("favorite.add")}
-            </StyledButton>
+            ""
           )}
 
           {VilleIsLocalition(coordonnees, props.ville.geometry.coordinates) ? (

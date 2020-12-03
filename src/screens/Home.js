@@ -58,12 +58,6 @@ const Home = () => {
     Weather.get(
       `?lon=${coordonnees.lon}&lat=${coordonnees.lat}&appid=${appid}`
     ).then((res) => {
-      /* Traitement de la météo
-       * Données utilisable :
-       * res.data.main.temp
-       * res.data.weather[0].main/humidity
-       * res.data.wind.deg/speed
-       */
       if (KalvinToCelsius(res.data.main.temp) > 20) {
         setVetements({ ...vetements, short: true });
         if (res.data.weather[0].main === "Clear") {

@@ -14,6 +14,18 @@ import { getCurrentLocation } from "../actions/meteo";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useHistory } from "react-router-dom";
 
+import { ReactComponent as Pants } from "../assets/pants.svg";
+import { ReactComponent as Sweater } from "../assets/sweater.svg";
+import { ReactComponent as Cap } from "../assets/cap.svg";
+import { ReactComponent as Scarf } from "../assets/scarf.svg";
+import { ReactComponent as Sunglasses } from "../assets/sunglasses.svg";
+import { ReactComponent as Umbrella } from "../assets/umbrella.svg";
+import { ReactComponent as Gloves } from "../assets/gloves.svg";
+import { ReactComponent as Boot } from "../assets/boot.svg";
+import { ReactComponent as Raincoat } from "../assets/raincoat.svg";
+import { ReactComponent as Short } from "../assets/shorts.svg";
+import { ReactComponent as Skirt } from "../assets/shorts.svg";
+
 const Home = () => {
   const { t } = useTranslation();
   const history = useHistory();
@@ -136,20 +148,76 @@ const Home = () => {
           <StyledH1>{t("home.title_cloth")}</StyledH1>
           <StyledText>{vetements.pantalon}</StyledText>
           <StyledText>{vetements.short}</StyledText>
-          {vetements.casquette ? <p>Il faut mettre une casquette</p> : ""}
-          {vetements.echarpe ? <p>Il faut mettre une echarpe</p> : ""}
-          {vetements.lunettes_soleil ? (
-            <p>Il faut mettre des lunettes_soleil</p>
+          {vetements.casquette ? (
+            <p>
+              Il faut mettre une casquette <Cap />
+            </p>
           ) : (
             ""
           )}
-          {vetements.parapluie ? <p>Il faut mettre un parapluie</p> : ""}
-          {vetements.gants ? <p>Il faut mettre des gants</p> : ""}
-          {vetements.bottes ? <p>Il faut mettre des bottes</p> : ""}
-          {vetements.pull ? <p>Il faut mettre un pull</p> : ""}
-          {vetements.manteau ? <p>Il faut mettre un manteau</p> : ""}
-          {vetements.short ? <p>Il faut mettre un short ou une jupe</p> : ""}
-          {vetements.pantalon ? <p>Il faut mettre un pantalon</p> : ""}
+          {vetements.echarpe ? (
+            <p>
+              Il faut mettre une echarpe <Scarf />
+            </p>
+          ) : (
+            ""
+          )}
+          {vetements.lunettes_soleil ? (
+            <p>
+              Il faut mettre des lunettes_soleil <Sunglasses />
+            </p>
+          ) : (
+            ""
+          )}
+          {vetements.parapluie ? (
+            <p>
+              Il faut mettre un parapluie <Umbrella />
+            </p>
+          ) : (
+            ""
+          )}
+          {vetements.gants ? (
+            <p>
+              Il faut mettre des gants <Gloves />
+            </p>
+          ) : (
+            ""
+          )}
+          {vetements.bottes ? (
+            <p>
+              Il faut mettre des bottes <Boot />
+            </p>
+          ) : (
+            ""
+          )}
+          {vetements.pull ? (
+            <p>
+              Il faut mettre un pull <Raincoat />
+            </p>
+          ) : (
+            ""
+          )}
+          {vetements.manteau ? (
+            <p>
+              Il faut mettre un manteau <Sweater />
+            </p>
+          ) : (
+            ""
+          )}
+          {vetements.short ? (
+            <p>
+              Il faut mettre un short <Short /> ou une <Skirt />
+            </p>
+          ) : (
+            ""
+          )}
+          {vetements.pantalon ? (
+            <p>
+              Il faut mettre un pantalon <Pants />
+            </p>
+          ) : (
+            ""
+          )}
         </StyledWrapper>
       </StyledDiv>
     </StyledMain>

@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "PWA_METEO",
+  "name": "La météo et les vêtements, en une seule application",
   "icons": [
     {
       "src": "favicon.ico",

@@ -16,3 +16,6 @@ L'appli météorologique qui vous relook
 [] Le site doit être mis en production.  
 [✔] Avoir une icone autre que celle de React a l'installation / avoir un Titre correct a l'installation (les modifications s'effectuent dans le manifest.json)  
 [✔] Avoir un site multi-lingue  
+
+Bonus :
+[✔] Redux Persist  

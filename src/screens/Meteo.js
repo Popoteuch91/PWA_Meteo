@@ -6,7 +6,6 @@ import { Weather, Forecast } from "../axios/meteo";
 import {
   KalvinToCelsius,
   UnixTimeToHour,
-  UnixTimeToDate,
   UnixTimeToDay,
   UnixTimeToMonth,
   UnixTimeToDayNumber,
@@ -15,7 +14,7 @@ import { useTranslation } from "react-i18next";
 import ForecastMeteo from "../components/forecastMeteo";
 
 const Meteo = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [meteo, setMeteo] = useState({});
   const [dailyMeteo, setDailyMeteo] = useState([]);
   const [previsionsMeteo, setPrevisionsMeteo] = useState([]);
@@ -33,19 +32,20 @@ const Meteo = () => {
       let dMeteo = [];
       for (let i = 0; i < 8; i++) {
         dMeteo.push(
-          <StyledDiv4_1>
-            <StyledDiv4_2>{UnixTimeToHour(res.data.list[i].dt)}</StyledDiv4_2>
+          <StyledDiv4ImgContainer>
+            <StyledDiv4Img>{UnixTimeToHour(res.data.list[i].dt)}</StyledDiv4Img>
             <img
+              alt={""}
               src={`http://openweathermap.org/img/wn/${res.data.list[i].weather[0].icon}@2x.png`}
             />
             <div>{KalvinToCelsius(res.data.list[i].main.temp)}°</div>
-          </StyledDiv4_1>
+          </StyledDiv4ImgContainer>
         );
       }
       let pMeteo = [];
       for (let i = 1; i <= 5; i++) {
         pMeteo.push(
-          <ForecastMeteo meteo={res.data} iterator={i}></ForecastMeteo>
+          <ForecastMeteo key={i} meteo={res.data} iterator={i}></ForecastMeteo>
         );
       }
       setPrevisionsMeteo(pMeteo);
@@ -74,15 +74,18 @@ const Meteo = () => {
           <LoaderBase />
         ) : (
           <StyledDiv2>
-            <StyledDiv2_>
+            <StyledDiv2Img>
               <img
+                alt={""}
                 src={`http://openweathermap.org/img/wn/${meteo.weather[0].icon}@2x.png`}
               />
-            </StyledDiv2_>
-            <StyledDiv2_1>
-              <StyledDiv2_2>{KalvinToCelsius(meteo.main.temp)}°</StyledDiv2_2>
-              <StyledDiv2_3>{meteo.weather[0].main}</StyledDiv2_3>
-            </StyledDiv2_1>
+            </StyledDiv2Img>
+            <StyledDiv2Temp>
+              <StyledDiv2TempVal>
+                {KalvinToCelsius(meteo.main.temp)}°
+              </StyledDiv2TempVal>
+              <StyledDiv2TempState>{meteo.weather[0].main}</StyledDiv2TempState>
+            </StyledDiv2Temp>
           </StyledDiv2>
         )}
         {Object.keys(meteo).length === 0 && meteo.constructor === Object ? (
@@ -90,37 +93,45 @@ const Meteo = () => {
         ) : (
           <StyledDiv3>
             <div>
-              <StyledDiv3_>{KalvinToCelsius(meteo.main.temp_max)}°</StyledDiv3_>
-              <StyledDiv3_1>{t("meteo.temp_max")}</StyledDiv3_1>
-              <StyledDiv3_>{KalvinToCelsius(meteo.main.temp_min)}°</StyledDiv3_>
-              <StyledDiv3_1>{t("meteo.temp_min")}</StyledDiv3_1>
+              <StyledDiv3TempVal>
+                {KalvinToCelsius(meteo.main.temp_max)}°
+              </StyledDiv3TempVal>
+              <StyledDiv3TempLabel>{t("meteo.temp_max")}</StyledDiv3TempLabel>
+              <StyledDiv3TempVal>
+                {KalvinToCelsius(meteo.main.temp_min)}°
+              </StyledDiv3TempVal>
+              <StyledDiv3TempLabel>{t("meteo.temp_min")}</StyledDiv3TempLabel>
             </div>
             <div>
-              <StyledDiv3_>{meteo.wind.speed}mph</StyledDiv3_>
-              <StyledDiv3_1>{t("meteo.wind")}</StyledDiv3_1>
-              <StyledDiv3_>{meteo.main.humidity}%</StyledDiv3_>
-              <StyledDiv3_1>{t("meteo.humidity")}</StyledDiv3_1>
+              <StyledDiv3TempVal>{meteo.wind.speed}mph</StyledDiv3TempVal>
+              <StyledDiv3TempLabel>{t("meteo.wind")}</StyledDiv3TempLabel>
+              <StyledDiv3TempVal>{meteo.main.humidity}%</StyledDiv3TempVal>
+              <StyledDiv3TempLabel>{t("meteo.humidity")}</StyledDiv3TempLabel>
             </div>
             <div>
-              <StyledDiv3_>{UnixTimeToHour(meteo.sys.sunrise)}</StyledDiv3_>
-              <StyledDiv3_1>{t("meteo.sunrise")}</StyledDiv3_1>
-              <StyledDiv3_>{UnixTimeToHour(meteo.sys.sunset)}</StyledDiv3_>
-              <StyledDiv3_1>{t("meteo.sunset")}</StyledDiv3_1>
+              <StyledDiv3TempVal>
+                {UnixTimeToHour(meteo.sys.sunrise)}
+              </StyledDiv3TempVal>
+              <StyledDiv3TempLabel>{t("meteo.sunrise")}</StyledDiv3TempLabel>
+              <StyledDiv3TempVal>
+                {UnixTimeToHour(meteo.sys.sunset)}
+              </StyledDiv3TempVal>
+              <StyledDiv3TempLabel>{t("meteo.sunset")}</StyledDiv3TempLabel>
             </div>
           </StyledDiv3>
         )}
         <StyledDiv4>
-          <StyledH2>{t("meteo.meteo_day")}</StyledH2>
-          <StyledDiv4_>
+          <Styled4H2>{t("meteo.meteo_day")}</Styled4H2>
+          <StyledDiv4Container>
             {dailyMeteo.length === 0 ? <LoaderBase /> : dailyMeteo}
-          </StyledDiv4_>
+          </StyledDiv4Container>
         </StyledDiv4>
         <StyledDiv5>
-          <StyledH2_>{t("meteo.meteo_forecast")}</StyledH2_>
+          <Styled5H2>{t("meteo.meteo_forecast")}</Styled5H2>
           {previsionsMeteo.length === 0 ? (
             <LoaderBase />
           ) : (
-            <StyledDiv5_>{previsionsMeteo}</StyledDiv5_>
+            <StyledDiv5Container>{previsionsMeteo}</StyledDiv5Container>
           )}
         </StyledDiv5>
       </StyledDiv>
@@ -208,25 +219,25 @@ const StyledDiv2 = styled.div`
     width: 50%;
   }
 `;
-const StyledDiv2_ = styled.div`
+const StyledDiv2Img = styled.div`
   flex-grow: 1.25;
   text-align: center;
   img {
     width: 10.5em;
   }
 `;
-const StyledDiv2_1 = styled.div`
+const StyledDiv2Temp = styled.div`
   flex-grow: 1;
   text-align: center;
 `;
-const StyledDiv2_2 = styled.div`
+const StyledDiv2TempVal = styled.div`
   font-size: 5.25em;
   font-weight: 300;
   @media (max-width: 375px) {
     font-size: 3.25em;
   }
 `;
-const StyledDiv2_3 = styled.div`
+const StyledDiv2TempState = styled.div`
   margin-top: 0em;
   margin-left: 0em;
   text-align: center;
@@ -250,11 +261,11 @@ const StyledDiv3 = styled.div`
     width: 50%;
   }
 `;
-const StyledDiv3_ = styled.div`
+const StyledDiv3TempVal = styled.div`
   margin-top: 1em;
   font-size: 1.44em;
 `;
-const StyledDiv3_1 = styled.div`
+const StyledDiv3TempLabel = styled.div`
   /* color: rgba(255, 255, 255, 0.8);*/
   @media screen and (min-width: 700px) {
     display: block;
@@ -266,7 +277,7 @@ const StyledDiv4 = styled.div`
     display: none;
   }
 `;
-const StyledH2 = styled.h2`
+const Styled4H2 = styled.h2`
   /*color: rgba(255, 255, 255, 0.8);*/
   font-size: 1em;
   font-weight: normal;
@@ -274,11 +285,11 @@ const StyledH2 = styled.h2`
     font-size: 1.125em;
   }
 `;
-const StyledDiv4_ = styled.div`
+const StyledDiv4Container = styled.div`
   display: flex;
   justify-content: space-between;
 `;
-const StyledDiv4_1 = styled.div`
+const StyledDiv4ImgContainer = styled.div`
   padding: 0.8em 0;
   width: 13%;
   border-radius: 5px;
@@ -289,14 +300,14 @@ const StyledDiv4_1 = styled.div`
     width: 6.05em;
   }*/
 `;
-const StyledDiv4_2 = styled.div`
+const StyledDiv4Img = styled.div`
   margin-bottom: 0.5em;
 `;
 const StyledDiv5 = styled.div`
   width: 100%;
   margin-top: 1em;
 `;
-const StyledH2_ = styled.div`
+const Styled5H2 = styled.div`
   /*color: rgba(255, 255, 255, 0.8);*/
   font-size: 1em;
   font-weight: normal;
@@ -306,7 +317,7 @@ const StyledH2_ = styled.div`
     font-size: 1.125em;
   }
 `;
-const StyledDiv5_ = styled.div`
+const StyledDiv5Container = styled.div`
   display: flex;
   flex-wrap: wrap;
 `;

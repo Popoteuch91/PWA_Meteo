@@ -11,7 +11,7 @@ import LoaderBase from "../loaderBase";
 import { VilleIsFavorite, VilleIsLocalition } from "../../mixins/functions";
 
 const FicheMeteo = (props) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const history = useHistory();
   const appid = useSelector((state) => state.ville.appid);
@@ -29,13 +29,14 @@ const FicheMeteo = (props) => {
     return <LoaderBase />;
   else
     return (
-      <StyledDiv>
+      <StyledDiv key={props.ville.properties.id}>
         <StyledDiv1>
           <StyledH1>{props.ville.properties.label}</StyledH1>
         </StyledDiv1>
         <StyledDiv2>
           <StyledDiv2Img>
             <img
+              alt={""}
               src={`http://openweathermap.org/img/wn/${meteo.weather[0].icon}@2x.png`}
             />
           </StyledDiv2Img>

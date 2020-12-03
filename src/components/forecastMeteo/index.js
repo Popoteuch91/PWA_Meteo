@@ -8,7 +8,7 @@ import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 
 const ForecastMeteo = (props) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
     <StyledDiv>
       <StyledDiv2>
@@ -33,6 +33,7 @@ const ForecastMeteo = (props) => {
       </StyledDiv3>
       <StyledDiv4>
         <img
+          alt={""}
           src={`http://openweathermap.org/img/wn/${
             props.meteo.list[8 * props.iterator - 1].weather[0].icon
           }@2x.png`}

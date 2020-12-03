@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { persistor } from "./config/store";
 import { PersistGate } from "redux-persist/integration/react";

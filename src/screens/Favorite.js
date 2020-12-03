@@ -12,7 +12,9 @@ const Favorite = () => {
   return (
     <StyledMain>
       {favorites.map((ville) => {
-        return <FicheMeteo ville={ville}></FicheMeteo>;
+        return (
+          <FicheMeteo key={ville.properties.id} ville={ville}></FicheMeteo>
+        );
       })}
     </StyledMain>
   );

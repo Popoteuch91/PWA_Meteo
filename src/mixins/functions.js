@@ -1,5 +1,3 @@
-import { useSelector } from "react-redux";
-
 const KalvinToCelsius = (K) => {
   return Math.round(K - 273.5);
 };
@@ -59,14 +57,16 @@ const UnixTimeToDayNumber = (UnixTime) => {
 
 const VilleIsFavorite = (favorites, id) => {
   let isFavorite = false;
-  favorites.map((favorite) => {
+  favorites.forEach((favorite) => {
     if (favorite.properties.id === id) isFavorite = true;
   });
   return isFavorite;
 };
 
 const VilleIsLocalition = (coordonnees, coordinates) => {
-  return coordonnees.lon == coordinates[0] && coordonnees.lat == coordinates[1];
+  return (
+    coordonnees.lon === coordinates[0] && coordonnees.lat === coordinates[1]
+  );
 };
 
 export {

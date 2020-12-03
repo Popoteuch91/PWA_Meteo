@@ -49,7 +49,6 @@ const Home = () => {
     shirt: false,
     pantalon: false,
   });
-  console.log(meteo);
   useEffect(() => {
     Weather.get(
       `?lon=${coordonnees.lon}&lat=${coordonnees.lat}&appid=${appid}`
@@ -93,7 +92,7 @@ const Home = () => {
         setVetements({ ...vetements, parapluie: true, bottes: true });
       }
     });
-  }, [coordonnees, appid]);
+  }, [coordonnees, appid, vetements]);
   return (
     <StyledMain>
       <StyledDiv>
@@ -124,6 +123,7 @@ const Home = () => {
               <Wrapper>
                 <WrapperLeft>
                   <img
+                    alt={""}
                     src={`http://openweathermap.org/img/wn/${meteo.weather[0].icon}@2x.png`}
                   />
                 </WrapperLeft>

@@ -3,8 +3,8 @@ import { DISPLAY_METEO, DISPLAY_COORDONNEES } from "../actions/meteo";
 const initialState = {
   meteo: [],
   coordonnees: {
-    lon: 3.042048,
-    lat: 36.752887,
+    lon: -0.6337376,
+    lat: 35.6976541,
   },
 };
 

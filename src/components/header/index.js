@@ -7,7 +7,7 @@ import { setSearch } from "../../actions/ville";
 import { getCurrentLocation } from "../../actions/meteo";
 import { useTranslation } from "react-i18next";
 import Toggle from "../toggle";
-import { switchTheme, displayTheme } from "../../actions/theme";
+import { displayTheme } from "../../actions/theme";
 import { ReactComponent as FlagFr } from "../../assets/france.svg";
 import { ReactComponent as FlagEn } from "../../assets/usa.svg";
 

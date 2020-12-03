@@ -9,7 +9,8 @@
     },
     "home": {
       "title": "My Local Weather",
-      "title_cloth": "Dress code suggestion"
+      "title_cloth": "Dress code suggestion",
+      "text_cloth": "Here are our tips on how to dress for the weather"
     },
     "meteo": {
       "title": "",

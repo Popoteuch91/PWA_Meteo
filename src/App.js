@@ -17,22 +17,9 @@ import {
   faStar,
   faSearch,
   faMapMarkerAlt,
-  faCloud,
-  faWind,
-  faCloudShowersHeavy,
 } from "@fortawesome/free-solid-svg-icons";
 
-library.add(
-  fab,
-  faHome,
-  faCloudMoon,
-  faStar,
-  faMapMarkerAlt,
-  faSearch,
-  faCloud,
-  faWind,
-  faCloudShowersHeavy
-);
+library.add(fab, faHome, faCloudMoon, faStar, faMapMarkerAlt, faSearch);
 export const GlobalStyles = createGlobalStyle`
   body {
     

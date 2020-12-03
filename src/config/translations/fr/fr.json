@@ -9,7 +9,8 @@
     },
     "home": {
       "title": "Ma Météo Locale",
-      "title_cloth": "Proposition vestimentaires"
+      "title_cloth": "Proposition vestimentaires",
+      "text_cloth": "Voila nos conseils vestimentaires en fonction du temps"
     },
     "meteo": {
       "title": "",

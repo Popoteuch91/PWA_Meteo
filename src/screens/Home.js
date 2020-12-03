@@ -14,17 +14,19 @@ import { getCurrentLocation } from "../actions/meteo";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useHistory } from "react-router-dom";
 
-import { ReactComponent as Pants } from "../assets/pants.svg";
-import { ReactComponent as Sweater } from "../assets/sweater.svg";
-import { ReactComponent as Cap } from "../assets/cap.svg";
-import { ReactComponent as Scarf } from "../assets/scarf.svg";
-import { ReactComponent as Sunglasses } from "../assets/sunglasses.svg";
 import { ReactComponent as Umbrella } from "../assets/umbrella.svg";
+import { ReactComponent as Cap } from "../assets/cap.svg";
+import { ReactComponent as Sunglasses } from "../assets/sunglasses.svg";
+import { ReactComponent as Mask } from "../assets/mask.svg";
+import { ReactComponent as Scarf } from "../assets/scarf.svg";
 import { ReactComponent as Gloves } from "../assets/gloves.svg";
-import { ReactComponent as Boot } from "../assets/boot.svg";
+import { ReactComponent as Shirt } from "../assets/shirt.svg";
 import { ReactComponent as Raincoat } from "../assets/raincoat.svg";
+import { ReactComponent as Sweater } from "../assets/sweater.svg";
 import { ReactComponent as Short } from "../assets/shorts.svg";
 import { ReactComponent as Skirt } from "../assets/skirt.svg";
+import { ReactComponent as Pants } from "../assets/pants.svg";
+import { ReactComponent as Boot } from "../assets/boot.svg";
 
 const Home = () => {
   const { t } = useTranslation();
@@ -34,6 +36,7 @@ const Home = () => {
   const [meteo, setMeteo] = useState({});
   const appid = useSelector((state) => state.ville.appid);
   const [vetements, setVetements] = useState({
+    masque: true,
     casquette: false,
     echarpe: false,
     lunettes_soleil: false,
@@ -43,6 +46,7 @@ const Home = () => {
     pull: false,
     manteau: false,
     short: false,
+    shirt: false,
     pantalon: false,
   });
   console.log(meteo);
@@ -146,78 +150,117 @@ const Home = () => {
         </StyledPanel>
         <StyledWrapper>
           <StyledH1>{t("home.title_cloth")}</StyledH1>
-          <StyledText>{vetements.pantalon}</StyledText>
-          <StyledText>{vetements.short}</StyledText>
-          {vetements.casquette ? (
-            <p>
-              Il faut mettre une casquette <Cap />
-            </p>
-          ) : (
-            ""
-          )}
-          {vetements.echarpe ? (
-            <p>
-              Il faut mettre une echarpe <Scarf />
-            </p>
-          ) : (
-            ""
-          )}
-          {vetements.lunettes_soleil ? (
-            <p>
-              Il faut mettre des lunettes_soleil <Sunglasses />
-            </p>
-          ) : (
-            ""
-          )}
-          {vetements.parapluie ? (
-            <p>
-              Il faut mettre un parapluie <Umbrella />
-            </p>
-          ) : (
-            ""
-          )}
-          {vetements.gants ? (
-            <p>
-              Il faut mettre des gants <Gloves />
-            </p>
-          ) : (
-            ""
-          )}
-          {vetements.bottes ? (
-            <p>
-              Il faut mettre des bottes <Boot />
-            </p>
-          ) : (
-            ""
-          )}
-          {vetements.pull ? (
-            <p>
-              Il faut mettre un pull <Raincoat />
-            </p>
-          ) : (
-            ""
-          )}
-          {vetements.manteau ? (
-            <p>
-              Il faut mettre un manteau <Sweater />
-            </p>
-          ) : (
-            ""
-          )}
-          {vetements.short ? (
-            <p>
-              Il faut mettre un short <Short /> ou une <Skirt />
-            </p>
-          ) : (
-            ""
-          )}
-          {vetements.pantalon ? (
-            <p>
-              Il faut mettre un pantalon <Pants />
-            </p>
-          ) : (
-            ""
-          )}
+          <StyledText>{t("home.text_cloth")}</StyledText>
+          <StyledDressCode>
+            {vetements.parapluie ? (
+              <div>
+                <StyledUm>
+                  <Umbrella />
+                </StyledUm>
+              </div>
+            ) : (
+              ""
+            )}
+            {vetements.casquette ? (
+              <div>
+                <div>
+                  <Cap />
+                </div>
+              </div>
+            ) : (
+              ""
+            )}{" "}
+            {vetements.lunettes_soleil ? (
+              <div>
+                <div>
+                  <Sunglasses />
+                </div>
+              </div>
+            ) : (
+              ""
+            )}
+            {vetements.masque ? (
+              <div>
+                <div>
+                  <Mask />
+                </div>
+              </div>
+            ) : (
+              ""
+            )}
+            {vetements.echarpe ? (
+              <div>
+                <div>
+                  <Scarf />
+                </div>
+              </div>
+            ) : (
+              ""
+            )}
+            {vetements.gants ? (
+              <div>
+                <div>
+                  <Gloves />
+                </div>
+              </div>
+            ) : (
+              ""
+            )}
+            {vetements.shirt ? (
+              <div>
+                <div>
+                  <Shirt />
+                </div>
+              </div>
+            ) : (
+              ""
+            )}
+            {vetements.pull ? (
+              <div>
+                <div>
+                  <Raincoat />
+                </div>
+              </div>
+            ) : (
+              ""
+            )}
+            {vetements.manteau ? (
+              <div>
+                <div>
+                  <Sweater />
+                </div>
+              </div>
+            ) : (
+              ""
+            )}
+            {vetements.short ? (
+              <div>
+                <StyledShk>
+                  <Short /> <Skirt />
+                </StyledShk>
+              </div>
+            ) : (
+              ""
+            )}
+            {vetements.pantalon ? (
+              <div>
+                <div>
+                  <Pants />
+                </div>
+              </div>
+            ) : (
+              ""
+            )}
+            {vetements.bottes ? (
+              <div>
+                <div>
+                  <Boot />
+                </div>
+              </div>
+            ) : (
+              ""
+            )}
+          </StyledDressCode>
         </StyledWrapper>
       </StyledDiv>
     </StyledMain>
@@ -281,7 +324,7 @@ const StyledMain = styled.div`
     padding-right: 3%;
   }
   @media (max-width: 375px) {
-    margin-top: 20%;
+    margin-top: 40%;
     margin-bottom: 20%;
     padding: 1%;
     padding-left: 5%;
@@ -322,7 +365,6 @@ const StyledTitre = styled.h2`
   font-weight: 500;
   line-height: 1.1;
 `;
-
 const Wrapper = styled.div`
   display: flex;
 `;
@@ -372,11 +414,32 @@ const StyledWrapper = styled.div`
   margin-top: 5%;
 `;
 const StyledText = styled.p`
-  font-size: 20px;
-  text-align: justify;
+  font-size: 1.5rem;
+  padding-right: 15px;
+  padding-left: 15px;
+  text-align: center;
+`;
+const StyledDressCode = styled.div`
+  text-align: center;
+  display: block;
+  width: 50%;
+  box-shadow: -1px 2px 8px 0px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.15);
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
   svg {
-    width: 2.5rem;
-    height: auto;
+    width: 50%;
   }
 `;
+const StyledUm = styled.div`
+  padding-top: 5%;
+`;
+const StyledShk = styled.div`
+  display: flex;
+  margin-top: -10%;
+`;
+
 export default Home;

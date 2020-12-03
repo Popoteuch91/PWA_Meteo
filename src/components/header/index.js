@@ -131,7 +131,6 @@ const NavLeft = styled.div`
   @media (max-width: 375px) {
     width: 100%;
     text-align: center;
-    height: 60px;
     position: fixed;
     bottom: 0;
     border-top: 1px solid black;

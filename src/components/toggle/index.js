@@ -4,7 +4,16 @@ import styled from "styled-components";
 
 import { ReactComponent as MoonIcon } from "../../assets/moon.svg";
 import { ReactComponent as SunIcon } from "../../assets/sun.svg";
+const Toggle = ({ theme, toggleTheme }) => {
+  const isLight = theme === "light";
 
+  return (
+    <ToggleContainer lightTheme={isLight} onClick={toggleTheme}>
+      <SunIcon />
+      <MoonIcon />
+    </ToggleContainer>
+  );
+};
 const ToggleContainer = styled.button`
   position: relative;
   display: inline-flex;
@@ -32,17 +41,6 @@ const ToggleContainer = styled.button`
     }
   }
 `;
-
-const Toggle = ({ theme, toggleTheme }) => {
-  const isLight = theme === "light";
-
-  return (
-    <ToggleContainer lightTheme={isLight} onClick={toggleTheme}>
-      <SunIcon />
-      <MoonIcon />
-    </ToggleContainer>
-  );
-};
 
 Toggle.propTypes = {
   toggleTheme: func.isRequired,

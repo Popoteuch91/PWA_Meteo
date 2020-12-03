@@ -24,7 +24,7 @@ import { ReactComponent as Gloves } from "../assets/gloves.svg";
 import { ReactComponent as Boot } from "../assets/boot.svg";
 import { ReactComponent as Raincoat } from "../assets/raincoat.svg";
 import { ReactComponent as Short } from "../assets/shorts.svg";
-import { ReactComponent as Skirt } from "../assets/shorts.svg";
+import { ReactComponent as Skirt } from "../assets/skirt.svg";
 
 const Home = () => {
   const { t } = useTranslation();
@@ -374,5 +374,9 @@ const StyledWrapper = styled.div`
 const StyledText = styled.p`
   font-size: 20px;
   text-align: justify;
+  svg {
+    width: 2.5rem;
+    height: auto;
+  }
 `;
 export default Home;

@@ -14,5 +14,5 @@ L'appli météorologique qui vous relook
 [✔] Utilisation Obligatoire de Redux (Pour la state globale et les appels API)  
 [] Mise en place des notifications PUSH (vous me montrerez que sa fonctionne lors de la démo le dernier jour)  
 [✔] Le site doit être mis en production.  
-[] Avoir une icone autre que celle de React a l'installation / avoir un Titre correct a l'installation (les modifications s'effectuent dans le manifest.json)  
+[✔] Avoir une icone autre que celle de React a l'installation / avoir un Titre correct a l'installation (les modifications s'effectuent dans le manifest.json)  
 [✔] Avoir un site multi-lingue  

@@ -8,7 +8,8 @@
       "search": "Search..."
     },
     "home": {
-      "title": "Home page"
+      "title": "My Local Weather",
+      "title_cloth": "Dress code suggestion"
     },
     "meteo": {
       "title": "",

@@ -3,9 +3,7 @@ import { useSelector } from "react-redux";
 import { persistor } from "./config/store";
 import { PersistGate } from "redux-persist/integration/react";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
-import { useDarkMode } from "./actions/useDarkMode";
 import { lightTheme, darkTheme } from "./config/theme";
-import Toggle from "./components/toggle";
 import "./App.css";
 import Header from "./components/header";
 import Footer from "./components/footer";
@@ -19,9 +17,22 @@ import {
   faStar,
   faSearch,
   faMapMarkerAlt,
+  faCloud,
+  faWind,
+  faCloudShowersHeavy,
 } from "@fortawesome/free-solid-svg-icons";
 
-library.add(fab, faHome, faCloudMoon, faStar, faMapMarkerAlt, faSearch);
+library.add(
+  fab,
+  faHome,
+  faCloudMoon,
+  faStar,
+  faMapMarkerAlt,
+  faSearch,
+  faCloud,
+  faWind,
+  faCloudShowersHeavy
+);
 export const GlobalStyles = createGlobalStyle`
   body {
     

@@ -145,22 +145,9 @@ const StyledMain = styled.div`
     box-sizing: border-box;
   }
   font-size: 100%;
-  /*color: white;*/
   height: 100%;
-  /*background: linear-gradient(
-    to bottom,
-    rgb(43, 50, 178) 0%,
-    rgb(20, 136, 204) 100%
-  );*/
-  /*background: linear-gradient(to bottom, rgb(0 0 0) 0%, rgb(7 113 177) 100%);
-  background: linear-gradient(180deg, #7595c4, #edc6bf);*/
   background-repeat: no-repeat;
   background-attachment: fixed;
-  @media screen and (min-width: 700px) {
-    body {
-      margin: 20px;
-    }
-  }
   margin-top: 4.5%;
   padding: 0.5%;
   padding-left: 1%;
@@ -183,6 +170,9 @@ const StyledMain = styled.div`
     padding: 1%;
     padding-left: 3%;
     padding-right: 3%;
+    body {
+      margin: 20px;
+    }
   }
   @media (max-width: 375px) {
     margin-top: 20%;

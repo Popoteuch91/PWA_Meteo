@@ -128,8 +128,7 @@ const Home = () => {
                     {t(`month.${UnixTimeToMonth(meteo.dt)}`)}
                   </StyledDivTempTitre>
                   <StyledDivTemp>
-                    {KalvinToCelsius(meteo.main.temp)}{" "}
-                    <StyledSpan>°</StyledSpan>
+                    {KalvinToCelsius(meteo.main.temp)}°
                   </StyledDivTemp>
                   <StyledDivTempHL>
                     {t("meteo.temp_max")}:{" "}
@@ -268,44 +267,23 @@ const StyledMain = styled.div`
     box-sizing: border-box;
   }
   font-size: 100%;
-  /*color: white;*/
   height: 100%;
-  /*background: linear-gradient(
-    to bottom,
-    rgb(43, 50, 178) 0%,
-    rgb(20, 136, 204) 100%
-  );*/
-  /*background: linear-gradient(to bottom, rgb(0 0 0) 0%, rgb(7 113 177) 100%);
-  background: linear-gradient(180deg, #7595c4, #edc6bf);*/
   background-repeat: no-repeat;
   background-attachment: fixed;
-  hr {
-    margin-top: 3px;
-    border-width: 1px 0;
-    border-color: white;
-  }
-
-  hr#hr-bottom {
-    margin-top: 0px;
-    margin-bottom: 5px;
-  }
-  @media screen and (min-width: 700px) {
-    body {
-      margin: 20px;
-    }
-  }
   margin-top: 4.5%;
   padding: 0.5%;
   padding-left: 1%;
   padding-right: 1%;
   @media (max-width: 1366px) {
     margin-top: 5%;
+    margin-bottom: 5%;
     padding: 2%;
     padding-left: 2%;
     padding-right: 2%;
   }
   @media (max-width: 1024px) {
     margin-top: 7.5%;
+    margin-bottom: 7.5%;
     padding: 1%;
     padding-left: 2%;
     padding-right: 2%;
@@ -316,9 +294,12 @@ const StyledMain = styled.div`
     padding: 1%;
     padding-left: 3%;
     padding-right: 3%;
+    body {
+      margin: 20px;
+    }
   }
   @media (max-width: 375px) {
-    margin-top: 40%;
+    margin-top: 20%;
     margin-bottom: 20%;
     padding: 1%;
     padding-left: 5%;
@@ -326,9 +307,7 @@ const StyledMain = styled.div`
   }
 `;
 const StyledDiv = styled.div`
-  max-width: 100%;
   max-width: none !important;
-  width: 1170px;
   display: block;
   vertical-align: middle;
   float: none;
@@ -345,9 +324,25 @@ const StyledH1 = styled.h1`
 const StyledPanel = styled.div`
   box-shadow: -1px 2px 8px 0px rgba(0, 0, 0, 0.3);
   background-color: rgba(0, 0, 0, 0.2);
+  width: 65%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  @media (max-width: 1366px) {
+    width: 80%;
+  }
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
+  @media (max-width: 768px) {
+    width: 80%;
+  }
+  @media (max-width: 375px) {
+    width: 100%;
+  }
 `;
 const StyledPanelBody = styled.div`
-  position: relative;
   margin-right: 20px;
   margin-left: 20px;
   padding-top: 5px;
@@ -361,21 +356,55 @@ const StyledTitre = styled.h2`
 `;
 const Wrapper = styled.div`
   display: flex;
+  @media (max-width: 768px) {
+    display: block;
+  }
+  @media (max-width: 375px) {
+    display: block;
+  }
 `;
 const WrapperLeft = styled.div`
   width: 50%;
   text-align: center;
   img {
     height: 100%;
+    width: 100%;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    text-align: center;
+  }
+  @media (max-width: 375px) {
+    width: 100%;
+    text-align: center;
   }
 `;
 const WrapperRight = styled.div`
   width: 50%;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+  @media (max-width: 375px) {
+    width: 100%;
+  }
 `;
 const StyledDivTempTitre = styled.h4`
   text-align: left;
   font-size: 32px;
   font-weight: 400;
+
+  @media (max-width: 768px) {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 400;
+  }
+  @media (max-width: 375px) {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 400;
+  }
 `;
 const StyledDivTemp = styled.p`
   text-align: left;
@@ -387,15 +416,15 @@ const StyledDivTemp = styled.p`
   text-align: left;
   font-weight: 500;
   line-height: 230px;
-`;
-const StyledSpan = styled.span`
-  vertical-align: baseline;
-  position: relative;
-  top: -150px;
-  line-height: 0;
-  font-size: 100px;
-  font-weight: 400;
-  margin-left: -10%;
+
+  @media (max-width: 768px) {
+    text-align: center;
+    font-size: 250px;
+  }
+  @media (max-width: 375px) {
+    text-align: center;
+    font-size: 150px;
+  }
 `;
 const StyledDivTempHL = styled.h5`
   text-align: left;
@@ -403,9 +432,23 @@ const StyledDivTempHL = styled.h5`
   margin-bottom: 10px;
   margin-top: 3%;
   font-weight: 300;
+  @media (max-width: 1366px) {
+    font-size: 30px;
+  }
+  @media (max-width: 1024px) {
+    font-size: 30px;
+  }
+  @media (max-width: 768px) {
+    text-align: center;
+  }
+  @media (max-width: 375px) {
+    text-align: center;
+    font-size: 20px;
+  }
 `;
 const StyledWrapper = styled.div`
   margin-top: 5%;
+  margin-bottom: 7%;
 `;
 const StyledText = styled.p`
   font-size: 1.5rem;
@@ -426,6 +469,30 @@ const StyledDressCode = styled.div`
   margin-left: auto;
   svg {
     width: 50%;
+    @media (max-width: 1366px) {
+      width: 80%;
+    }
+    @media (max-width: 1024px) {
+      width: 80%;
+    }
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+    @media (max-width: 375px) {
+      width: 100%;
+    }
+  }
+  @media (max-width: 1366px) {
+    width: 60%;
+  }
+  @media (max-width: 1024px) {
+    width: 70%;
+  }
+  @media (max-width: 768px) {
+    width: 80%;
+  }
+  @media (max-width: 375px) {
+    width: 100%;
   }
 `;
 const StyledUm = styled.div`

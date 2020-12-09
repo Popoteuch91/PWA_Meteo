@@ -86,7 +86,7 @@ const Home = () => {
         setVetements({ ...vetements, parapluie: true, bottes: true });
       }
     });
-  }, [coordonnees, appid, vetements]);
+  }, [coordonnees, appid]);
   return (
     <StyledMain>
       <StyledDiv>

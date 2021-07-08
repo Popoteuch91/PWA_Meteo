@@ -1,0 +1,41 @@
+{
+  "files": {
+    "main.css": "/static/css/main.ab7136cd.chunk.css",
+    "main.js": "/static/js/main.71ddf346.chunk.js",
+    "main.js.map": "/static/js/main.71ddf346.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.462227dd.js",
+    "runtime-main.js.map": "/static/js/runtime-main.462227dd.js.map",
+    "static/js/2.382e789b.chunk.js": "/static/js/2.382e789b.chunk.js",
+    "static/js/2.382e789b.chunk.js.map": "/static/js/2.382e789b.chunk.js.map",
+    "static/js/3.40483ad1.chunk.js": "/static/js/3.40483ad1.chunk.js",
+    "static/js/3.40483ad1.chunk.js.map": "/static/js/3.40483ad1.chunk.js.map",
+    "index.html": "/index.html",
+    "service-worker.js": "/service-worker.js",
+    "service-worker.js.map": "/service-worker.js.map",
+    "static/css/main.ab7136cd.chunk.css.map": "/static/css/main.ab7136cd.chunk.css.map",
+    "static/js/2.382e789b.chunk.js.LICENSE.txt": "/static/js/2.382e789b.chunk.js.LICENSE.txt",
+    "static/media/boot.09f197a2.svg": "/static/media/boot.09f197a2.svg",
+    "static/media/cap.ada3a67e.svg": "/static/media/cap.ada3a67e.svg",
+    "static/media/france.58f2ed24.svg": "/static/media/france.58f2ed24.svg",
+    "static/media/gloves.d1fcc069.svg": "/static/media/gloves.d1fcc069.svg",
+    "static/media/mask.e9cf534d.svg": "/static/media/mask.e9cf534d.svg",
+    "static/media/moon.717c6e48.svg": "/static/media/moon.717c6e48.svg",
+    "static/media/pants.b675c459.svg": "/static/media/pants.b675c459.svg",
+    "static/media/raincoat.6973b1cb.svg": "/static/media/raincoat.6973b1cb.svg",
+    "static/media/scarf.04156277.svg": "/static/media/scarf.04156277.svg",
+    "static/media/shirt.e9a5af44.svg": "/static/media/shirt.e9a5af44.svg",
+    "static/media/shorts.cffe8914.svg": "/static/media/shorts.cffe8914.svg",
+    "static/media/skirt.15e98137.svg": "/static/media/skirt.15e98137.svg",
+    "static/media/sun.7d1e1b01.svg": "/static/media/sun.7d1e1b01.svg",
+    "static/media/sunglasses.89641369.svg": "/static/media/sunglasses.89641369.svg",
+    "static/media/sweater.51e29a6e.svg": "/static/media/sweater.51e29a6e.svg",
+    "static/media/umbrella.5f8cb5a2.svg": "/static/media/umbrella.5f8cb5a2.svg",
+    "static/media/usa.4c70daf4.svg": "/static/media/usa.4c70daf4.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.462227dd.js",
+    "static/js/2.382e789b.chunk.js",
+    "static/css/main.ab7136cd.chunk.css",
+    "static/js/main.71ddf346.chunk.js"
+  ]
+}
